@@ -21,6 +21,10 @@ header {
       border-radius: 0 0 15px 15px;
   }
 
+  header img{
+    width: 4vw;
+  }
+
   img {
     max-width: 120px;
   }
