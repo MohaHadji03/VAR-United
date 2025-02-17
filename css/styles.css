@@ -157,7 +157,12 @@ nav ul li a.active {
 }
 
   /*------------------------login---------------------*/
-
+  main {
+    height: 100vh; /* Volledige hoogte van het scherm */
+    display: flex;
+    justify-content: center; /* Horizontaal centreren */
+    align-items: center; /* Verticaal centreren */
+}
   
   .login-form {
     position: relative;
