@@ -1,106 +1,149 @@
 @import url(https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@400&display=swap);
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  body{
-    font-family: "Baloo Bhai 2";
-  }
+body {
+  font-family: "Baloo Bhai 2";
+}
 
 h1 {
-    color: #002571;
+  color: #002571;
 }
 
 h2 {
-    color: #0075d5; 
+  color: #0075d5;
 }
 
 header {
-    background: linear-gradient(135deg, #002571, #0075d5);
-      padding: 1.5rem 2rem;
-      display: flex;
-      align-items: center;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  }
+  background: linear-gradient(135deg, #002571, #0075d5);
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-  header img{
-    width: 4vw;
-  }
+header img {
+  width: 4vw;
+}
 
-  img {
-    max-width: 120px;
-  }
+img {
+  max-width: 120px;
+}
 
-  nav {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-  }
+nav {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
 
-  nav ul {
-    display: flex;
-    list-style: none;
-  }
+nav ul {
+  display: flex;
+  list-style: none;
+}
 
-  nav ul li {
-    padding: 1vw;
-  }
+nav ul li {
+  padding: 1vw;
+}
 
-  nav ul li a {
-    text-decoration: none;
-    color: white;
-    font-size: 1rem;
-    transition: color 0.3s;
-    text-transform: uppercase;
-  }
+nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  transition: color 0.3s;
+  text-transform: uppercase;
+}
 
-  nav ul li a:hover {
-    color: #ffdd00;
+nav ul li a:hover {
+  color: #ffdd00;
 
-  }
+}
 
-  .auth-links {
-    list-style: none;
-    display: flex;
-    gap: 1rem;
-  }
+.auth-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
 
-  .auth-links li a {
-    text-decoration: none;
-    font-size: 1rem;
-    padding: 0.3rem 0.8rem;
-    border: 1px solid white;
-    border-radius: 8px;
-    box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-  }
+.auth-links li a {
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid white;
+  border-radius: 8px;
+  box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
 
-  .login{
-    background-color: #0075d5;
-    color: white;
-  }
-  
-  .login:hover {
-    background-color: white;
-    color: black;
-    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
-  }
+.login {
+  background-color: #0075d5;
+  color: white;
+}
 
-  .register{
-    background-color: white;
-    color: black;
-  }
+.login:hover {
+  background-color: white;
+  color: black;
+  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+}
 
-  .register:hover{
-    color: black;
-    background-color: #dfdfdf;
-  }
+.register {
+  background-color: white;
+  color: black;
+}
 
-  .right-section {
-    display: flex;
-    justify-content: flex-end;
-    min-width: 150px;
+.register:hover {
+  color: black;
+  background-color: #dfdfdf;
+}
+
+.right-section {
+  display: flex;
+  justify-content: flex-end;
+  min-width: 150px;
+}
+
+.image-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* 3 images per row */
+  gap: 20px;
+  /* Increased space between images */
+  max-width: 90vw;
+  /* Make the gallery take most of the screen width */
+  margin: 20px auto;
+  padding: 0 10px;
+  text-align: center;
+}
+
+.image-gallery img {
+  width: 100%;
+  /* Ensures images fully fill the container */
+  height: auto;
+  /* Maintain aspect ratio */
+  border-radius: 8px;
+  /* Optional: rounded corners */
+  transition: transform 0.3s ease-in-out;
+}
+
+.image-gallery img:hover {
+  transform: scale(1.08);
+  /* Slight zoom effect */
+}
+
+/* Make sure the images stack properly on smaller screens */
+@media (max-width: 768px) {
+  .image-gallery {
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 images per row on smaller screens */
   }
+}
+
+@media (max-width: 480px) {
+  .image-gallery {
+    grid-template-columns: repeat(1, 1fr);
+    /* 1 image per row on very small screens */
+  }
+}
