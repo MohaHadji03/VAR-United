@@ -21,7 +21,7 @@
             </ul>
         </div>
     </header>
-    
+
     <main>
         <section class="image-gallery">
             <a href=""><img src="assets/fortnite.jpg" alt="Fortnite"></a>
@@ -35,6 +35,28 @@
     <footer>
 
     </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Select all images inside the gallery
+            const images = document.querySelectorAll(".image-gallery a");
+
+            images.forEach(image => {
+                image.addEventListener("click", function (event) {
+                    // Prevent the link from following the href
+                    event.preventDefault();
+
+                    // Check if it's the FIFA image
+                    if (!this.getAttribute("href").includes("fifaHomePage.html")) {
+                        alert("Error: This game is not available!");
+                    } else {
+                        // Allow navigation for the FIFA image
+                        window.location.href = this.getAttribute("href");
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
