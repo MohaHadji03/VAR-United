@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@400&display=swap);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.css);
 
 * {
   margin: 0;
@@ -102,109 +103,143 @@ nav ul li a.active {
   background-color: #dfdfdf;
 }
 
-.right-section {
-  display: flex;
-  justify-content: flex-end;
-  min-width: 150px;
-}
-
-.image-gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  /* 3 images per row */
-  gap: 20px;
-  max-width: 90vw;
-  margin: 20px auto;
-  padding: 0 10px;
-  text-align: center;
-}
-
-.card {
-  width: 100%;
-  height: 300px;
-  /* Keep aspect ratio */
-  display: grid;
-  color: white;
-  font-size: 2rem;
-  cursor: pointer;
-  overflow: hidden;
-  position: relative;
-  border-radius: 1rem;
-  place-items: center;
-  letter-spacing: 0.2rem;
-  background: linear-gradient(320deg, #002571 30%, #0075d5 88%);
-}
-
-.card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease-in-out;
-}
-
-.card::before,
-.card::after {
-  content: '';
-  width: 20%;
-  height: 20%;
-  opacity: .3;
-  display: grid;
-  place-items: center;
-  font-size: .5rem;
-  position: absolute;
-  transition: .5s, font-size 1s ease-in-out .2s;
-  background: linear-gradient(320deg, #003399 30%, #005fbb 88%);
-}
-
-.card::before {
-  left: 0;
-  top: 0;
-  border-radius: 1rem 0 100% 0;
-}
-
-.card::after {
-  right: 0;
-  bottom: 0;
-  border-radius: 100% 0 1rem 0;
-}
-
-.card:hover img {
-  transform: scale(1.1);
-  /* Slight zoom on hover */
-}
-
-.card:hover::before,
-.card:hover::after {
-  opacity: 1;
-  width: 100%;
-  height: 100%;
-  font-size: 2rem;
-  border-radius: 1rem;
-}
-
-.card:hover::after {
-  content: attr(data-text);
-  /* Use the custom text from the HTML */
-  color: white;
-  background: linear-gradient(320deg, #002571 30%, #0075d5 88%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-/* Make sure the images stack properly on smaller screens */
-@media (max-width: 768px) {
-  .image-gallery {
-    grid-template-columns: repeat(2, 1fr);
-    /* 2 images per row on smaller screens */
+  .right-section {
+    display: flex;
+    justify-content: flex-end;
+    min-width: 150px;
   }
+
+  .main-container {
+    display: flex;
+    width:100%;
+    justify-content: left;
+    align-items: center;
+    margin-left: 1vw;
+    margin-top: 0;
 }
 
-@media (max-width: 480px) {
-  .image-gallery {
-    grid-template-columns: repeat(1, 1fr);
-    /* 1 image per row on very small screens */
-  }
+.social-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0;
+    margin: 0;
+}
+
+.item {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    cursor: pointer;
+    position: relative;
+    transition: all .3s;
+    list-style: none;
+}
+
+.item a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    text-decoration: none;
+}
+
+.fab {
+    width: 100%;
+    height: 100%;
+    font-size: 18px;
+    transition: .3s;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: rgba(255, 255, 255, 0.878);
+    border: 1px solid rgba(156, 156, 156, 0.256);
+}
+
+.bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    border-radius: 30%;
+    transition: all .3s;
+}
+
+.insta-bg {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.link-bg {
+    background: rgb(1, 80, 123);
+}
+
+.whats-bg {
+    background: #15a54a;
+}
+
+.pint-bg {
+    background: #E60023;
+}
+
+.face-bg {
+    background: #215eae;
+}
+
+.social-container .item:hover .bg {
+    transform: rotate(25deg);
+    transform-origin: bottom;
+}
+
+.social-container .item:hover .fab {
+    background-color: rgba(156, 156, 156, 0.466);
+}
+
+.social-container .item:hover span:last-child {
+    transform: translateX(60px);
+    width: 100px;
+}
+
+.social-container .item span:last-child {
+    position: absolute;
+    color: #ffdd00;
+    font-family: 'calibri';
+    width: 0px;
+    overflow: hidden;
+    z-index: -1;
+    top: 10%;
+    transform: translateX(20px);
+    transition: .3s;
+}
+
+#aboutus{
+  margin: 1vw;
+}
+
+#aboutus h1{
+  font-size: 4vw;
+}
+
+#aboutus h2{
+  font-size: 3vw;
+}
+
+#aboutus p{
+  font-size: clamp(14px, 1.2vw, 18px); 
+  line-height: 1.6;
+  color: #333;
+}
+
+#aboutus h3{
+  font-size: 2vw;
+  color: #0075d5;
+}
+
+.list{
+  list-style:circle;
+  padding-left: 1px;
+  margin: 1vw;
+}
+
+#aboutus section{
+  border-bottom: 2px solid #002571;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
