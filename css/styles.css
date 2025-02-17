@@ -59,7 +59,10 @@ nav ul li a {
 
 nav ul li a:hover {
   color: #ffdd00;
+}
 
+nav ul li a.active {
+  color: #ffdd00;
 }
 
 .auth-links {

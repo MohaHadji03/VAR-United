@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="css/reset.css">
     <title>Document</title>
 </head>
+
 <body>
     <header>
         <img src="assets/logoCropped.png" alt="logo">
@@ -14,6 +16,9 @@
             <ul>
                 <li><a href="fifaHomePage.html">Home</a></li>
                 <li><a href="landingspagina.html">games</a></li>
+                <li><a href="favoriet.html">favorieten</a></li>
+                <li><a href="blacklist.html">blacklisted</a></li>
+                <li><a href="quizpagina.html">quiz</a></li>
                 <li><a href="aboutus.html">about us</a></li>
             </ul>
         </nav>
@@ -24,10 +29,22 @@
             </ul>
         </div>
     </header>
-    <h1>Hello VARS</h1>
-    <h2>deze zaak gepushed</h2>
-    <h2>laatste push tests</h2>
-    <h2>Test van Moha zijn dev</h2>
-    <h2>test van movar, kleine update hieraan</h2>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get the current page URL
+            const currentPage = window.location.pathname.split("/").pop();
+
+            // Select all nav links
+            const navLinks = document.querySelectorAll("nav ul li a");
+
+            navLinks.forEach(link => {
+                if (link.getAttribute("href") === currentPage) {
+                    link.classList.add("active"); // Add 'active' class to the current page
+                }
+            });
+        });
+    </script>
+
 </body>
+
 </html>
