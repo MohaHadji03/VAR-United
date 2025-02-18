@@ -6,58 +6,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/reset.css">
-    <title>Document</title>
+    <title>Registreer pagina</title>
 </head>
 
 <body>
     <header>
-        <img src="assets/logoCropped.png" alt="logo">
+        <a href="landingspagina.html"><img src="assets/logoCropped.png" alt="logo"></a>
         <nav>
         </nav>
         <div class="right-section">
             <ul class="auth-links">
-                <li><a href="login.html" class="login">login</a></li>
-                <li><a href="register.html" class="register">register</a></li>
+                <li><a href="login.html" class="login">Login</a></li>
+                <li><a href="register.html" class="register">Registreer</a></li>
             </ul>
         </div>
     </header>
 
-    <main>
+    <main class="register-container">
         <form class="register-form">
-            <p class="title">Register </p>
-            <p class="message">Signup now and get full access to our app. </p>
-            <section class="registerPage">
-                <label>
-                    <input required="" placeholder="" type="text" class="input">
-                    <span>Voornaam</span>
-                </label>
-
-                <label>
-                    <input required="" placeholder="" type="text" class="input">
-                    <span>Achternaam</span>
-                </label>
-
-                <label>
-                    <input required="" placeholder="" type="text" class="input">
-                    <span>Gebruikersnaam</span>
-                </label>
-            </section>
+            <p class="title">Registreer </p>
+            <p class="message">Meld je nu aan en krijg volledige toegang tot de game</p>
 
             <label>
-                <input required="" placeholder="" type="email" class="input">
+                <input required type="text" class="input">
+                <span>Gebruikersnaam</span>
+            </label>
+
+            <label>
+                <input required type="email" class="input">
                 <span>Email</span>
             </label>
 
             <label>
-                <input required="" placeholder="" type="password" class="input">
+                <input required type="password" class="input" id="password">
                 <span>Wachtwoord</span>
+                <div class="password-requirements">
+                    <i class="fas fa-info-circle"></i>
+                    <div class="tooltip">
+                        Wachtwoord vereisten:
+                        <ul>
+                            <li>Minimaal 8 tekens</li>
+                            <li>Minstens 1 hoofdletter</li>
+                            <li>Minstens 1 kleine letter</li>
+                            <li>Minstens 1 nummer</li>
+                            <li>Minstens 1 speciaal teken (!@#$%^&*)</li>
+                        </ul>
+                    </div>
+                </div>
             </label>
+
             <label>
-                <input required="" placeholder="" type="password" class="input">
+                <input required type="password" class="input" id="confirm-password">
                 <span>Verifieër wachtwoord</span>
             </label>
+
             <button class="submit">Submit</button>
-            <p class="signin">Heb je al een account ? <a href="#">Log-in</a> </p>
+            <p class="signin">Heb je al een account ? <a href="/login.html">Log-in</a> </p>
         </form>
     </main>
 
