@@ -28,7 +28,7 @@
             <div class="blacklist-club">
                 <h3>Club 1</h3>
                 <img src="assets/Celtic_FC_crest.svg.png" alt="club1" width="200px" height="150px">
-                <p>Reden blacklist</p>
+                <p>Reden blacklist: slechte ervaring</p>
                 <div class="buttons">
                     <button class="remove-btn">Verwijderen</button>
                     <button class="edit-btn">Reden aanpassen</button>
@@ -37,7 +37,7 @@
             <div class="blacklist-club">
                 <h3>Club 2</h3>
                 <img src="assets/Eintracht_Frankfurt_Logo.png" alt="club2" width="200px" height="150px">
-                <p>Reden blacklist</p>
+                <p>Reden blacklist: gewonnen van de team van wie ik hou</p>
                 <div class="buttons">
                     <button class="remove-btn">Verwijderen</button>
                     <button class="edit-btn">Reden aanpassen</button>
@@ -46,7 +46,7 @@
             <div class="blacklist-club">
                 <h3>Club 3</h3>
                 <img src="assets/Real_Sociedad_logo.svg.png" alt="club3" width="200px" height="150px">
-                <p>Reden blacklist</p>
+                <p>Reden blacklist: ik haat de spelers </p>
                 <div class="buttons">
                     <button class="remove-btn">Verwijderen</button>
                     <button class="edit-btn">Reden aanpassen</button>
@@ -85,6 +85,55 @@
                 }
             });
         });
+
+
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Alle bewerk-knoppen pakken
+        document.querySelectorAll(".edit-btn").forEach(button => {
+            button.addEventListener("click", function () {
+                let clubDiv = this.parentElement.parentElement;
+                let redenParagraaf = clubDiv.querySelector("p");
+                let nieuweReden = prompt("Geef een nieuwe reden:");
+                
+                if (nieuweReden) {
+                    redenParagraaf.textContent = "Reden blacklist: " + nieuweReden;
+
+                    // Stuur update naar de server
+                    fetch('/update-blacklist', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            club: clubDiv.querySelector("h3").textContent,
+                            reden: nieuweReden
+                        })
+                    });
+                }
+            });
+        });
+
+        // Alle verwijder-knoppen pakken
+        document.querySelectorAll(".remove-btn").forEach(button => {
+            button.addEventListener("click", function () {
+                let clubDiv = this.parentElement.parentElement;
+                let clubNaam = clubDiv.querySelector("h3").textContent;
+
+                if (confirm(`Wil je ${clubNaam} verwijderen van de blacklist?`)) {
+                    clubDiv.remove();
+
+                    // Stuur verwijdering naar de server
+                    fetch('/delete-blacklist', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ club: clubNaam })
+                    });
+                }
+            });
+        });
+    });
+
+
     </script>
 </body>
 
