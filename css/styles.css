@@ -734,7 +734,7 @@ button {
 
 .comp__card {
   position: relative;
-  width: 300px;
+  width: 550px;
   height: 250px;
   background-color: #f2f2f2;
   border-radius: 10px;
@@ -795,7 +795,8 @@ button {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: normal;
-  max-height: 100px; /* Pas de hoogte aan op basis van je kaartgrootte */
+  max-height: 100px;
+  font-size: 1vw;
 }
 
 .comp__card__button {
