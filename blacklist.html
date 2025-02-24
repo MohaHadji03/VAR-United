@@ -81,7 +81,7 @@
 
             navLinks.forEach(link => {
                 if (link.getAttribute("href") === currentPage) {
-                    link.classList.add("active"); // Add 'active' class to the current page
+                    link.classList.add("active"); 
                 }
             });
         });
@@ -90,7 +90,7 @@
 
 
     document.addEventListener("DOMContentLoaded", function () {
-        // Alle bewerk-knoppen pakken
+        
         document.querySelectorAll(".edit-btn").forEach(button => {
             button.addEventListener("click", function () {
                 let clubDiv = this.parentElement.parentElement;
@@ -100,7 +100,7 @@
                 if (nieuweReden) {
                     redenParagraaf.textContent = "Reden blacklist: " + nieuweReden;
 
-                    // Stuur update naar de server
+                   
                     fetch('/update-blacklist', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -113,7 +113,7 @@
             });
         });
 
-        // Alle verwijder-knoppen pakken
+        
         document.querySelectorAll(".remove-btn").forEach(button => {
             button.addEventListener("click", function () {
                 let clubDiv = this.parentElement.parentElement;
@@ -122,7 +122,7 @@
                 if (confirm(`Wil je ${clubNaam} verwijderen van de blacklist?`)) {
                     clubDiv.remove();
 
-                    // Stuur verwijdering naar de server
+                    
                     fetch('/delete-blacklist', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
