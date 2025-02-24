@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <title>Competities</title>
+</head>
+
+<body>
+    <header>
+        <a href="fifaHomePage.html"><img src="assets/logoCropped.png" alt="logo"></a>
+        <nav></nav>
+        <div class="right-section">
+            <a href=""><img src="" alt="user-icon"></a>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="comp__container">
+            <section class="comp__card">
+                <section class="card__icon">
+                    <img src="/assets/Celtic_FC_crest.svg.png" alt="Celtic FC">
+                </section>
+
+                <section class="comp__card__content">
+                    <section class="comp__card__text">
+                        <p class="comp__card__title">Celtic FC</p>
+                        <p class="comp__card__description">Celtic FC is een Schotse voetbalclub uit Glasgow, opgericht
+                            in 1887, en
+                            bekend om zijn groene en witte hoepelshirts. De club heeft een intense rivaliteit met
+                            Rangers
+                            FC, beter bekend als de "Old Firm," en heeft talloze nationale en internationale titels
+                            gewonnen.</p>
+                    </section>
+
+                    <section class="comp__card__buttons">
+                        <button class="comp__card__button">Blacklist</button>
+                        <button class="comp__card__button secondary">Favoriet</button>
+                    </section>
+                </section>
+            </section>
+
+            <!-- Eintracht Frankfurt -->
+            <section class="comp__card">
+                <section class="card__icon">
+                    <img src="/assets/Eintracht_Frankfurt_Logo.png" alt="Eintracht Frankfurt">
+                </section>
+
+                <section class="comp__card__content">
+                    <section class="comp__card__text">
+                        <p class="comp__card__title">Eintracht Frankfurt</p>
+                        <p class="comp__card__description">Eintracht Frankfurt is een Duitse voetbalclub, opgericht in
+                            1899, en
+                            speelt in de Bundesliga. De club heeft een rijke geschiedenis, met successen in zowel
+                            nationale
+                            competities als Europese toernooien, waaronder winst in de UEFA Europa League.</p>
+                    </section>
+
+                    <section class="comp__card__buttons">
+                        <button class="comp__card__button">Blacklist</button>
+                        <button class="comp__card__button secondary">Favoriet</button>
+                    </section>
+                </section>
+            </section>
+
+            <!-- Real Sociedad -->
+            <section class="comp__card">
+                <section class="card__icon">
+                    <img src="/assets/Real_Sociedad_logo.svg.png" alt="Real Sociedad">
+                </section>
+
+                <section class="comp__card__content">
+                    <section class="comp__card__text">
+                        <p class="comp__card__title">Real Sociedad</p>
+                        <p class="comp__card__description">Real Sociedad is een Spaanse voetbalclub uit San Sebastián,
+                            opgericht
+                            in 1909, en speelt in La Liga. De club staat bekend om haar sterke jeugdopleiding en won
+                            meerdere nationale titels, waaronder La Liga en de Copa del Rey.</p>
+                    </section>
+
+                    <section class="comp__card__buttons">
+                        <button class="comp__card__button">Blacklist</button>
+                        <button class="comp__card__button secondary">Favoriet</button>
+                    </section>
+                </section>
+            </section>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <a href="fifaHomePage.html"><img src="assets/logoCropped.png" alt="Logo"></a>
+            </div>
+            <div class="footer-links">
+                <a href="aboutus.html">About Us</a>
+            </div>
+            <div class="footer-socials">
+                <a href="#" target="_blank">Facebook</a>
+                <a href="#" target="_blank">Twitter</a>
+                <a href="#" target="_blank">Instagram</a>
+            </div>
+            <p class="footer-copy">&copy; 2025 VAR United. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get the current page URL
+            const currentPage = window.location.pathname.split("/").pop();
+
+            // Select all nav links
+            const navLinks = document.querySelectorAll("nav ul li a");
+
+            navLinks.forEach(link => {
+                if (link.getAttribute("href") === currentPage) {
+                    link.classList.add("active"); // Add 'active' class to the current page
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

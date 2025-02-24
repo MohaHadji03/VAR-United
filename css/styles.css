@@ -707,3 +707,101 @@ button {
   transition: .3s ease;
   text-align: center;
 }
+
+/*Teams*/
+
+.comp__container {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+
+.comp__card {
+  position: relative;
+  width: 300px;
+  height: 250px;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  perspective: 1000px;
+  box-shadow: 0 0 0 5px #ffffff80;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.comp__card__image {
+  width: 100%;
+  height: 100%;
+}
+.card__icon img {
+  width: 200px;
+  height: auto;
+  object-fit: contain;
+}
+
+.comp__card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+}
+
+.comp__card__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+  transform: rotateX(-90deg);
+  transform-origin: bottom;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.comp__card:hover .comp__card__content {
+  transform: rotateX(0deg);
+}
+
+.comp__card__title {
+  margin: 0;
+  font-size: 20px;
+  color: #333;
+  font-weight: 700;
+}
+
+.comp__card:hover svg {
+  scale: 0;
+}
+
+.comp__card__description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  max-height: 100px; /* Pas de hoogte aan op basis van je kaartgrootte */
+}
+
+.comp__card__button {
+  padding: 15px;
+  border-radius: 8px;
+  background: #777;
+  border: none;
+  color: white;
+}
+
+.comp__card__buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.secondary {
+  background: transparent;
+  color: #777;
+  border: 1px solid #777;
+}
