@@ -564,7 +564,7 @@ nav ul li a.active {
 
 .image-gallery {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 images per row */
+  grid-template-columns: repeat(3, 1fr); 
   gap: 20px;
   max-width: 90vw;
   margin: 20px auto;
@@ -574,7 +574,7 @@ nav ul li a.active {
 
 .card {
     width: 100%;
-    height: 300px; /* Keep aspect ratio */
+    height: 300px; 
     display: grid;
     color: white;
     font-size: 2rem;
@@ -707,3 +707,104 @@ button {
   transition: .3s ease;
   text-align: center;
 }
+
+/*favoriete*/
+
+.favoriete-keuze {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  padding-top: 43px;
+}
+
+.image-gallerys {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 20px;
+  max-width: 90vw;
+  max-height: 90vh;
+  margin: 20px auto;
+  padding: 0 10px;
+  text-align: center;
+}
+
+.favoriete-card {
+    width: 100%;
+    height: 800px; 
+    display: grid;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    border-radius: 1rem;
+    place-items: center;
+    letter-spacing: 0.2rem;
+    background: linear-gradient(320deg, #002571 30%, #0075d5 88%);
+
+}
+
+.favoriete-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.favoriete-card::before,
+.favoriete-card::after {
+  content: '';
+  width: 20%;
+  height: 20%;
+  opacity: .3;
+  display: grid;
+  place-items: center;
+  font-size: .5rem;
+  position: absolute;
+  transition: .5s, font-size 1s ease-in-out .2s;
+  background: linear-gradient(320deg, #003399 30%, #005fbb 88%);
+}
+
+.favoriete-card::before {
+  left: 0;
+  top: 0;
+  border-radius: 1rem 0 100% 0;
+}
+
+.favoriete-card::after {
+  right: 0;
+  bottom: 0;
+  border-radius: 100% 0 1rem 0;
+}
+
+.favoriete-card:hover img {
+  transform: scale(1.1); /* Slight zoom on hover */
+}
+
+.favoriete-card:hover::before,
+.favoriete-card:hover::after {
+  opacity: 1;
+  width: 100%;
+  height: 100%;
+  font-size: 2rem;
+  border-radius: 1rem;
+}
+
+.favoriete-card:hover::after {
+  content: attr(data-text); /* Use the custom text from the HTML */
+  color: white;
+  background: linear-gradient(320deg, #002571 30%, #0075d5 88%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+
+
+
+
+
+

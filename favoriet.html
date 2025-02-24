@@ -18,7 +18,19 @@
         </div>
     </header>
 
-
+    <div class="blacklist-header">
+        <a href="fifaHomePage.html" class="back-arrow">&#9664;</a> 
+        <h1>favoriete Clubs</h1>
+        <div class="user-box">Gebruiker</div>
+    </div>
+    
+    <div class="card-fav">
+        <img class="card-img" src="assets/laliga.jpeg" alt="">
+        <div class="card__content">
+          <p class="card__title">LaLiga</p>
+          <p class="card__description">De hoogste Spaanse voetbalcompetitie, bekend om zijn technische finesse en intense rivaliteiten zoals El Clásico.</p>
+        </div>
+      </div>
 
     <footer>
         <div class="footer-container">
@@ -49,7 +61,27 @@
                     link.classList.add("active"); // Add 'active' class to the current page
                 }
             });
+
+            document.querySelectorAll(".remove-btn").forEach(button => {
+            button.addEventListener("click", function () {
+                let clubDiv = this.parentElement.parentElement;
+                let clubNaam = clubDiv.querySelector("h3").textContent;
+
+                if (confirm(`Wil je ${clubNaam} verwijderen van de blacklist?`)) {
+                    clubDiv.remove();
+
+                    
+                    fetch('/delete-blacklist', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ club: clubNaam })
+                    });
+                }
+            });
         });
+        });
+
+
     </script>
 </body>
 
