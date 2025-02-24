@@ -7,7 +7,8 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
 }
@@ -22,7 +23,8 @@ body {
 
 .content-container {
   display: grid;
-  grid-template-columns: 2fr 1fr; /* 2/3 voor main, 1/3 voor aside */
+  grid-template-columns: 2fr 1fr;
+  /* 2/3 voor main, 1/3 voor aside */
   gap: 20px;
   margin: 20px;
 
@@ -156,9 +158,9 @@ nav ul li a.active {
   box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
-  /*------------------------login---------------------*/
- 
-  
+/*------------------------login---------------------*/
+
+
 .form-login {
   display: flex;
   flex-direction: column;
@@ -172,9 +174,9 @@ nav ul li a.active {
   margin-top: 3.5rem;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
-  
 
-  
+
+
 .form-login label {
   position: relative;
   display: block;
@@ -193,7 +195,7 @@ nav ul li a.active {
   z-index: 1;
 }
 
-.form-login label .input + span {
+.form-login label .input+span {
   position: absolute;
   left: 10px;
   top: 15px;
@@ -206,19 +208,19 @@ nav ul li a.active {
   z-index: 2;
 }
 
-.form-login label .input:placeholder-shown + span {
+.form-login label .input:placeholder-shown+span {
   top: 15px;
   font-size: 0.9em;
 }
 
-.form-login label .input:focus + span,
-.form-login label .input:valid + span {
+.form-login label .input:focus+span,
+.form-login label .input:valid+span {
   top: -10px;
   font-size: 0.7em;
   font-weight: 600;
 }
 
-.form-login label .input:valid + span {
+.form-login label .input:valid+span {
   color: green;
 }
 
@@ -250,7 +252,8 @@ nav ul li a.active {
   padding-left: 30px;
 }
 
-.title::before,.title::after {
+.title::before,
+.title::after {
   position: absolute;
   content: "";
   border-radius: 50%;
@@ -269,7 +272,8 @@ nav ul li a.active {
   animation: pulse 1s linear infinite;
 }
 
-.message, .signin {
+.message,
+.signin {
   color: rgba(88, 87, 87, 0.822);
   font-size: 14px;
 }
@@ -304,7 +308,7 @@ nav ul li a.active {
   z-index: 1;
 }
 
-.register-form label .input + span {
+.register-form label .input+span {
   position: absolute;
   left: 10px;
   top: 15px;
@@ -317,19 +321,19 @@ nav ul li a.active {
   z-index: 2;
 }
 
-.register-form label .input:placeholder-shown + span {
+.register-form label .input:placeholder-shown+span {
   top: 15px;
   font-size: 0.9em;
 }
 
-.register-form label .input:focus + span,
-.register-form label .input:valid + span {
+.register-form label .input:focus+span,
+.register-form label .input:valid+span {
   top: -10px;
   font-size: 0.7em;
   font-weight: 600;
 }
 
-.register-form label .input:valid + span {
+.register-form label .input:valid+span {
   color: green;
 }
 
@@ -564,7 +568,7 @@ nav ul li a.active {
 
 .image-gallery {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); 
+  grid-template-columns: repeat(3, 1fr); /* 3 images per row */
   gap: 20px;
   max-width: 90vw;
   margin: 20px auto;
@@ -574,7 +578,7 @@ nav ul li a.active {
 
 .card {
     width: 100%;
-    height: 300px; 
+    height: 300px; /* Keep aspect ratio */
     display: grid;
     color: white;
     font-size: 2rem;
@@ -588,172 +592,14 @@ nav ul li a.active {
 }
 
 .card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease-in-out;
-}
-
-.card::before,
-.card::after {
-    content: '';
-    width: 20%;
-    height: 20%;
-    opacity: .3;
-    display: grid;
-    place-items: center;
-    font-size: .5rem;
-    position: absolute;
-    transition: .5s, font-size 1s ease-in-out .2s;
-    background: linear-gradient(320deg, #003399 30%, #005fbb 88%);
-}
-
-.card::before {
-    left: 0;
-    top: 0;
-    border-radius: 1rem 0 100% 0;
-}
-
-.card::after {
-    right: 0;
-    bottom: 0;
-    border-radius: 100% 0 1rem 0;
-}
-
-.card:hover img {
-    transform: scale(1.1); /* Slight zoom on hover */
-}
-
-.card:hover::before,
-.card:hover::after {
-    opacity: 1;
-    width: 100%;
-    height: 100%;
-    font-size: 2rem;
-    border-radius: 1rem;
-}
-
-.card:hover::after {
-    content: attr(data-text); /* Use the custom text from the HTML */
-    color: white;
-    background: linear-gradient(320deg, #002571 30%, #0075d5 88%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-
-/*blacklist*/
-
-.blacklist-container {
-  width: 80%;
-  margin: 0 auto;
-}
-.blacklist-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  background: #f0f0f0;
-}
-.back-arrow {
-  cursor: pointer;
-}
-
-
-.blacklist-clubs {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin-top: 20px;
-}
-.blacklist-club {
-  border: 1px solid #ccc;
-  padding: 20px;
-  width: 200px;
-  text-align: center;
-}
-.buttons {
-  margin-top: 50px;
-}
-button {
-  margin: 5px;
-  padding: 10px;
-  border: none;
-  cursor: pointer;
-}
-.remove-btn {
-  border: none;
-  outline: none;
-  background-color:#002571;
-  padding: 10px;
-  border-radius: 10px;
-  color: #fff;
-  font-size: 16px;
-  transition: .3s ease;
-  text-align: center;
-}
-.edit-btn {
-  border: none;
-  outline: none;
-  background-color: #0075d5;
-  padding: 10px;
-  border-radius: 10px;
-  color: #fff;
-  font-size: 16px;
-  transition: .3s ease;
-  text-align: center;
-}
-
-/*favoriete*/
-
-.favoriete-keuze {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
-  padding-top: 43px;
-}
-
-.image-gallerys {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); 
-  gap: 20px;
-  max-width: 90vw;
-  max-height: 90vh;
-  margin: 20px auto;
-  padding: 0 10px;
-  text-align: center;
-}
-
-.favoriete-card {
-    width: 100%;
-    height: 800px; 
-    display: grid;
-    color: white;
-    font-size: 2rem;
-    cursor: pointer;
-    overflow: hidden;
-    position: relative;
-    border-radius: 1rem;
-    place-items: center;
-    letter-spacing: 0.2rem;
-    background: linear-gradient(320deg, #002571 30%, #0075d5 88%);
-
-}
-
-.favoriete-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease-in-out;
 }
 
-.favoriete-card::before,
-.favoriete-card::after {
+.card::before,
+.card::after {
   content: '';
   width: 20%;
   height: 20%;
@@ -766,24 +612,25 @@ button {
   background: linear-gradient(320deg, #003399 30%, #005fbb 88%);
 }
 
-.favoriete-card::before {
+.card::before {
   left: 0;
   top: 0;
   border-radius: 1rem 0 100% 0;
 }
 
-.favoriete-card::after {
+.card::after {
   right: 0;
   bottom: 0;
   border-radius: 100% 0 1rem 0;
 }
 
-.favoriete-card:hover img {
-  transform: scale(1.1); /* Slight zoom on hover */
+.card:hover img {
+  transform: scale(1.1);
+  /* Slight zoom on hover */
 }
 
-.favoriete-card:hover::before,
-.favoriete-card:hover::after {
+.card:hover::before,
+.card:hover::after {
   opacity: 1;
   width: 100%;
   height: 100%;
@@ -791,8 +638,9 @@ button {
   border-radius: 1rem;
 }
 
-.favoriete-card:hover::after {
-  content: attr(data-text); /* Use the custom text from the HTML */
+.card:hover::after {
+  content: attr(data-text);
+  /* Use the custom text from the HTML */
   color: white;
   background: linear-gradient(320deg, #002571 30%, #0075d5 88%);
   display: flex;
@@ -803,8 +651,72 @@ button {
 }
 
 
+/*blacklist*/
+
+.blacklist-container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.blacklist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: #f0f0f0;
+}
+
+.back-arrow {
+  cursor: pointer;
+}
 
 
+.blacklist-clubs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+}
 
+.blacklist-club {
+  border: 1px solid #ccc;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+}
 
+.buttons {
+  margin-top: 50px;
+}
 
+button {
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.remove-btn {
+  border: none;
+  outline: none;
+  background-color: #002571;
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  transition: .3s ease;
+  text-align: center;
+}
+
+.edit-btn {
+  border: none;
+  outline: none;
+  background-color: #0075d5;
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  transition: .3s ease;
+  text-align: center;
+}
