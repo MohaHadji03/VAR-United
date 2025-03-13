@@ -819,7 +819,17 @@ button {
   color: #777;
   border: 1px solid #777;
 }
+/* quiz */
 
+.image-gallerys-quiz {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 20px;
+  max-width: 90vw;
+  margin: 20px auto;
+  padding: 0 10px;
+  text-align: center;
+}
 
 /*tussenpaginas blacklist en favorite */
 
