@@ -591,81 +591,75 @@ nav ul li a.active {
   text-align: center;
 }
 
-.card {
-  width: 100%;
-  height: 300px;
-  /* Keep aspect ratio */
+.image-navigation {
   display: grid;
-  color: white;
-  font-size: 2rem;
-  cursor: pointer;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsief grid */
+  min-height: 100vh; /* Volledige viewporthoogte */
+  width: 100vw; /* Volledige breedte */
   overflow: hidden;
+}
+
+.card {
   position: relative;
-  border-radius: 1rem;
-  place-items: center;
-  letter-spacing: 0.2rem;
-  background: linear-gradient(320deg, #002571 30%, #0075d5 88%);
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
 }
 
 .card img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* Zorgt ervoor dat de afbeelding mooi past */
   transition: transform 0.3s ease-in-out;
 }
 
-.card::before,
-.card::after {
-  content: '';
-  width: 20%;
-  height: 20%;
-  opacity: .3;
-  display: grid;
-  place-items: center;
-  font-size: .5rem;
-  position: absolute;
-  transition: .5s, font-size 1s ease-in-out .2s;
-  background: linear-gradient(320deg, #003399 30%, #005fbb 88%);
-}
-
-.card::before {
-  left: 0;
-  top: 0;
-  border-radius: 1rem 0 100% 0;
-}
-
-.card::after {
-  right: 0;
-  bottom: 0;
-  border-radius: 100% 0 1rem 0;
+/* Hover effect */
+.card:hover {
+  transform: scale(1.02);
 }
 
 .card:hover img {
   transform: scale(1.1);
-  /* Slight zoom on hover */
 }
 
-.card:hover::before,
-.card:hover::after {
-  opacity: 1;
+/* Overlay met tekst die de pagina-naam weergeeft */
+.card::after {
+  content: attr(data-text); /* Haalt de tekst uit het HTML data-attribuut */
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  font-size: 2rem;
-  border-radius: 1rem;
-}
-
-.card:hover::after {
-  content: attr(data-text);
-  /* Use the custom text from the HTML */
+  background: linear-gradient(320deg, rgba(0, 37, 113, 0.8) 30%, rgba(0, 117, 213, 0.8) 88%);
   color: white;
-  background: linear-gradient(320deg, #002571 30%, #0075d5 88%);
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
-  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
 }
 
+.card:hover::after {
+  opacity: 1; /* Zorgt ervoor dat de overlay zichtbaar wordt bij hover */
+}
+
+@media (max-width: 768px) {
+  .image-navigation {
+    grid-template-columns: 1fr; /* Zorgt ervoor dat er 1 kaart per rij staat */
+    gap: 10px; /* Voegt ruimte toe tussen de afbeeldingen */
+    padding: 10px 0; /* Extra ademruimte boven en onder */
+  }
+
+  .card {
+    height: 50vh; /* Zorgt ervoor dat de kaarten een mooie hoogte hebben */
+    border-radius: 10px; /* Maakt de kaarten subtiel afgerond voor een zachtere look */
+    overflow: hidden; /* Voorkomt dat de afbeelding buiten de rand komt */
+  }
+}
 
 /*blacklist*/
 
