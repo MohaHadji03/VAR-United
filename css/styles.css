@@ -40,15 +40,29 @@ h2 {
 
 header {
   background: linear-gradient(135deg, #002571, #0075d5);
-  padding: 1.5rem 2rem;
+  padding: 1rem 1.5rem;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  grid-column: 1 / -1;
+  width: 100%;
 }
 
+/* Standaard styling (desktop) */
 header img {
-  width: 4vw;
+  width: 8vw;  /* Dynamisch, maar niet te groot */
+  max-width: 100px; /* Maximale breedte op grote schermen */
+  min-width: 60px; /* Voorkomt dat het te klein wordt */
+  height: auto; /* Houdt de verhoudingen correct */
+}
+
+/* Mobile Fix */
+@media (max-width: 768px) {
+  header img {
+      width: 15vw; /* Groter dan desktop, maar niet overdreven */
+      max-width: 80px; /* Houdt het compact */
+      min-width: 50px; /* Voorkomt dat het te klein wordt */
+  }
 }
 
 footer {
@@ -427,7 +441,7 @@ nav ul li a.active {
 .right-section {
   display: flex;
   justify-content: flex-end;
-  min-width: 150px;
+  align-items: center;
 }
 
 .main-container {
@@ -947,7 +961,9 @@ body.quiz-page {
 }
 
 .logo img {
-  width: 60px;
+  width: 10vw;
+  max-width: 120px;
+  height: auto;
 }
 
 .quiz-container {
