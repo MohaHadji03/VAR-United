@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <title>Voetbal Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(320deg, #002571 30%, #0075d5 88%);
+            color: white;
+            margin: 0;
+            position: relative;
+            padding: 10px;
+        }
+        .logo {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .logo img {
+            width: 60px;
+        }
+        .quiz-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        .quiz-question img {
+            width: 100%;
+            height: auto;
+            max-height: 250px;
+            border-radius: 10px;
+            object-fit: contain;
+        }
+        .quiz-options {
+            margin-top: 20px;
+        }
+        .option {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 5px 0;
+            background: #ffcc00;
+            color: #002571;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            font-size: 1rem;
+        }
+        .option:hover {
+            background: #ffaa00;
+            transform: scale(1.05);
+        }
+        .correct {
+            background: #28a745 !important;
+            color: white;
+        }
+        .incorrect {
+            background: #dc3545 !important;
+            color: white;
+        }
+        .quiz-result {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-top: 20px;
+            display: none;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #FFD700;
+            backdrop-filter: blur(5px);
+        }
+        .quiz-buttons {
+            margin-top: 20px;
+            display: none;
+        }
+        .quiz-buttons a, .quiz-buttons button {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background: #ffcc00;
+            color: #002571;
+            font-weight: bold;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+        .quiz-buttons a:hover, .quiz-buttons button:hover {
+            background: #ffaa00;
+        }
+        @media (max-width: 600px) {
+            .quiz-container {
+                width: 95%;
+            }
+            .option {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="logo">
+        <a href="fifaHomePage.html"><img src="assets/logoCropped.png" alt="logo"></a>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-question">
+            <img id="player-image" src="" alt="Raad de speler"> <!-- Placeholder image -->
+        </div>
+        <div class="quiz-options" id="options"></div>
+        <div class="quiz-result" id="result"></div>
+        <div class="quiz-buttons" id="quiz-buttons">
+            <a href="fifaHomePage.html">🏠 Terug naar Home</a>
+            <a href="quizpagina.html">📜 Andere Quizzen</a>
+            <button onclick="location.reload()">🔄 Zelfde Quiz Opnieuw</button>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { image: "assets/kyllianMbp.png", options: ["Kylian Mbappé", "Erling Haaland", "Lionel Messi", "Cristiano Ronaldo"], answer: "Kylian Mbappé" },
+            { image: "assets/alanShe.png", options: ["Thierry Henry", "Didier Drogba", "Alan Shearer", "Samuel Eto'o"], answer: "Alan Shearer" },
+            { image: "assets/royKea.png", options: ["Andrea Pirlo", "Steven Gerrard", "Frank Lampard", "Roy Keane"], answer: "Roy Keane" },
+            { image: "assets/paulSch.png", options: ["Xavi", "Paul Scholes", "Luka Modric", "Zinedine Zidane"], answer: "Paul Scholes" },
+            { image: "assets/alessandroNes.png", options: ["Alessandro Nesta", "Carles Puyol", "Franco Baresi", "Sergio Ramos"], answer: "Alessandro Nesta" }
+        ];
+
+        let huidigeVraag = 0;
+        let score = 0;
+
+        function laadVraag() {
+            if (huidigeVraag >= quizData.length) {
+                document.getElementById("player-image").style.display = "none";
+                document.getElementById("options").style.display = "none";
+                document.getElementById("result").style.display = "block";
+                document.getElementById("quiz-buttons").style.display = "block";
+                
+                let bericht = "";
+                if (score === quizData.length) {
+                    bericht = "🏆 Perfecte score! Je bent een voetballegende! 🏆";
+                } else if (score >= quizData.length / 2) {
+                    bericht = `🔥 Goed gedaan! Je score is ${score} van de ${quizData.length}! 🔥`;
+                } else {
+                    bericht = `😕 Je score is ${score} van de ${quizData.length}. Blijf oefenen!`;
+                }
+                document.getElementById("result").innerText = bericht;
+                return;
+            }
+            
+            const vraagData = quizData[huidigeVraag];
+            document.getElementById("player-image").src = vraagData.image;
+            const optionsDiv = document.getElementById("options");
+            optionsDiv.innerHTML = "";
+
+            vraagData.options.forEach(optie => {
+                const btn = document.createElement("button");
+                btn.classList.add("option");
+                btn.innerText = optie;
+                btn.onclick = () => controleerAntwoord(btn, optie);
+                optionsDiv.appendChild(btn);
+            });
+        }
+
+        function controleerAntwoord(button, antwoord) {
+            if (antwoord === quizData[huidigeVraag].answer) {
+                button.classList.add("correct");
+                score++;
+            } else {
+                button.classList.add("incorrect");
+            }
+            setTimeout(() => {
+                huidigeVraag++;
+                laadVraag();
+            }, 1000);
+        }
+
+        laadVraag();
+    </script>
+</body>
+</html>
