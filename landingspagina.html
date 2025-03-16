@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/reset.css">
-    <title>Document</title>
+    <title>Landingspagina</title>
+    <link rel="icon" type="" href="/assets/logoCropped.png">
 </head>
 
 <body>
@@ -75,19 +76,15 @@
     </footer>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Select all images inside the gallery
             const images = document.querySelectorAll(".image-gallery a");
 
             images.forEach(image => {
                 image.addEventListener("click", function (event) {
-                    // Prevent the link from following the href
                     event.preventDefault();
 
-                    // Check if it's the FIFA image
                     if (!this.getAttribute("href").includes("fifaHomePage.html")) {
-                        alert("Error: This game is not available!");
+                        alert("Error: Dit spel is niet beschikbaar!");
                     } else {
-                        // Allow navigation for the FIFA image
                         window.location.href = this.getAttribute("href");
                     }
                 });
