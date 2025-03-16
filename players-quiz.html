@@ -8,116 +8,11 @@
     <link rel="stylesheet" href="css/reset.css">
     <title>Voetbal Quiz</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background: linear-gradient(320deg, #002571 30%, #0075d5 88%);
-            color: white;
-            margin: 0;
-            position: relative;
-            padding: 10px;
-        }
-        .logo {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-        .logo img {
-            width: 60px;
-        }
-        .quiz-container {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-            width: 100%;
-            max-width: 500px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
-        .quiz-question img {
-            width: 100%;
-            height: auto;
-            max-height: 250px;
-            border-radius: 10px;
-            object-fit: contain;
-        }
-        .quiz-options {
-            margin-top: 20px;
-        }
-        .option {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            margin: 5px 0;
-            background: #ffcc00;
-            color: #002571;
-            font-weight: bold;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
-            font-size: 1rem;
-        }
-        .option:hover {
-            background: #ffaa00;
-            transform: scale(1.05);
-        }
-        .correct {
-            background: #28a745 !important;
-            color: white;
-        }
-        .incorrect {
-            background: #dc3545 !important;
-            color: white;
-        }
-        .quiz-result {
-            font-size: 1.8em;
-            font-weight: bold;
-            margin-top: 20px;
-            display: none;
-            padding: 20px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.2);
-            color: #FFD700;
-            backdrop-filter: blur(5px);
-        }
-        .quiz-buttons {
-            margin-top: 20px;
-            display: none;
-        }
-        .quiz-buttons a, .quiz-buttons button {
-            display: inline-block;
-            margin: 10px;
-            padding: 10px 20px;
-            background: #ffcc00;
-            color: #002571;
-            font-weight: bold;
-            text-decoration: none;
-            border: none;
-            border-radius: 5px;
-            transition: background 0.3s;
-            cursor: pointer;
-        }
-        .quiz-buttons a:hover, .quiz-buttons button:hover {
-            background: #ffaa00;
-        }
-        @media (max-width: 600px) {
-            .quiz-container {
-                width: 95%;
-            }
-            .option {
-                font-size: 0.9rem;
-            }
-        }
+        
     </style>
 </head>
 
-<body>
+<body class="quiz-page">
     <div class="logo">
         <a href="fifaHomePage.html"><img src="assets/logoCropped.png" alt="logo"></a>
     </div>
@@ -129,9 +24,10 @@
         <div class="quiz-result" id="result"></div>
         <div class="quiz-buttons" id="quiz-buttons">
             <a href="fifaHomePage.html">🏠 Terug naar Home</a>
-            <a href="quizpagina.html">📜 Andere Quizzen</a>
-            <button onclick="location.reload()">🔄 Zelfde Quiz Opnieuw</button>
+            <a href="players-quiz.html">🔄 Opnieuw Spelen</a>
+            <a href="quizpagina.html">🆕 Andere Quiz</a>
         </div>
+        
     </div>
 
     <script>
