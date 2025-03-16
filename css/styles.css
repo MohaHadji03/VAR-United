@@ -831,6 +831,16 @@ button {
   border: 1px solid #777;
 }
 
+@media (max-width: 768px) {
+  .comp__card__description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    max-height: 190px;
+    font-size: 4vw;
+  }
+}
+
 /* quiz */
 
 .image-gallerys-quiz {
