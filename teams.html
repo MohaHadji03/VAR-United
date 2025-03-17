@@ -22,7 +22,7 @@
     <main>
 
         <section class="comp__container">
-            <!-- Celtic FC -->
+          
             <section class="comp__card">
                 <section class="card__icon">
                     <img src="/assets/Celtic_FC_crest.svg.png" alt="Celtic FC">
@@ -46,7 +46,7 @@
                 </section>
             </section>
 
-            <!-- Eintracht Frankfurt -->
+          
             <section class="comp__card">
                 <section class="card__icon">
                     <img src="/assets/Eintracht_Frankfurt_Logo.png" alt="Eintracht Frankfurt">
@@ -69,7 +69,7 @@
                 </section>
             </section>
 
-            <!-- Real Sociedad -->
+         
             <section class="comp__card">
                 <section class="card__icon">
                     <img src="/assets/Real_Sociedad_logo.svg.png" alt="Real Sociedad">
@@ -112,15 +112,15 @@
     </footer>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Get the current page URL
+          
             const currentPage = window.location.pathname.split("/").pop();
 
-            // Select all nav links
+         
             const navLinks = document.querySelectorAll("nav ul li a");
 
             navLinks.forEach(link => {
                 if (link.getAttribute("href") === currentPage) {
-                    link.classList.add("active"); // Add 'active' class to the current page
+                    link.classList.add("active"); 
                 }
             });
         });
