@@ -24,7 +24,6 @@ body {
 .content-container {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  /* 2/3 voor main, 1/3 voor aside */
   gap: 20px;
   margin: 20px;
 
@@ -48,20 +47,20 @@ header {
   width: 100%;
 }
 
-/* Standaard styling (desktop) */
+
 header img {
-  width: 8vw;  /* Dynamisch, maar niet te groot */
-  max-width: 100px; /* Maximale breedte op grote schermen */
-  min-width: 60px; /* Voorkomt dat het te klein wordt */
-  height: auto; /* Houdt de verhoudingen correct */
+  width: 8vw; 
+  max-width: 100px; 
+  min-width: 60px; 
+  height: auto; 
 }
 
-/* Mobile Fix */
+
 @media (max-width: 768px) {
   header img {
-      width: 15vw; /* Groter dan desktop, maar niet overdreven */
-      max-width: 80px; /* Houdt het compact */
-      min-width: 50px; /* Voorkomt dat het te klein wordt */
+      width: 15vw; 
+      max-width: 80px; 
+      min-width: 50px; 
   }
 }
 
@@ -583,7 +582,6 @@ nav ul li a.active {
 .image-gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* 3 images per row */
   gap: 20px;
   max-width: 90vw;
   margin: 20px auto;
@@ -610,7 +608,7 @@ nav ul li a.active {
 .card img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Zorgt ervoor dat de afbeelding mooi past */
+  object-fit: cover; 
   transition: transform 0.3s ease-in-out;
 }
 
@@ -623,9 +621,9 @@ nav ul li a.active {
   transform: scale(1.1);
 }
 
-/* Overlay met tekst die de pagina-naam weergeeft */
+
 .card::after {
-  content: attr(data-text); /* Haalt de tekst uit het HTML data-attribuut */
+  content: attr(data-text); 
   position: absolute;
   bottom: 0;
   left: 0;
@@ -644,20 +642,20 @@ nav ul li a.active {
 }
 
 .card:hover::after {
-  opacity: 1; /* Zorgt ervoor dat de overlay zichtbaar wordt bij hover */
+  opacity: 1;
 }
 
 @media (max-width: 768px) {
   .image-navigation {
-    grid-template-columns: 1fr; /* Zorgt ervoor dat er 1 kaart per rij staat */
-    gap: 10px; /* Voegt ruimte toe tussen de afbeeldingen */
-    padding: 10px 0; /* Extra ademruimte boven en onder */
+    grid-template-columns: 1fr; 
+    gap: 10px; 
+    padding: 10px 0; 
   }
 
   .card {
-    height: 50vh; /* Zorgt ervoor dat de kaarten een mooie hoogte hebben */
-    border-radius: 10px; /* Maakt de kaarten subtiel afgerond voor een zachtere look */
-    overflow: hidden; /* Voorkomt dat de afbeelding buiten de rand komt */
+    height: 50vh; 
+    border-radius: 10px; 
+    overflow: hidden; 
   }
 }
 
@@ -845,7 +843,7 @@ button {
 
 .image-gallerys-quiz {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Zorgt voor responsiviteit */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
   gap: 15px; /* Ruimte tussen de afbeeldingen */
   padding: 20px;
   max-width: 1200px;
@@ -868,9 +866,9 @@ button {
 .between-card {
   position: relative;
   width: 100%;
-  height: 350px; /* Beperkte hoogte zodat de afbeeldingen niet te lang worden */
+  height: 450px; 
   overflow: hidden;
-  border-radius: 10px; /* Zachte randen voor een mooiere look */
+  border-radius: 10px; 
   transition: transform 0.3s ease-in-out;
 }
 
@@ -934,11 +932,11 @@ button {
 
 @media (max-width: 768px) {
   .image-gallerys-quiz {
-    grid-template-columns: 1fr; /* Zorgt ervoor dat er maar 1 afbeelding per rij is */
+    grid-template-columns: 1fr; 
   }
 
   .between-card {
-    height: 250px; /* Lagere hoogte op mobiel om te voorkomen dat het te lang wordt */
+    height: 250px; 
   }
 }
 
