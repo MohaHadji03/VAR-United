@@ -1,0 +1,21 @@
+{
+  "name": "var-united",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000V\u0000A\u0000R\u0000-\u0000U\u0000n\u0000i\u0000t\u0000e\u0000d\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "start": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.14.1",
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "mongodb": "^6.16.0"
+  }
+}
