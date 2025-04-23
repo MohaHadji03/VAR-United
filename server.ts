@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Basic test route
 app.get('/', (req, res) => {
-    res.render('landingspagina'); // Make sure views/index.ejs exists
+    res.render('landingspagina', { title: 'Landingspagina' }); // Make sure views/index.ejs exists
 });
 
 // Start server
