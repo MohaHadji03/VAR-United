@@ -18,6 +18,10 @@ app.get('/', (req, res) => {
     res.render('landingspagina', { title: 'Landingspagina' }); // Make sure views/index.ejs exists
 });
 
+app.get('/home', (req, res) => {
+    res.render('fifahomepage', { title: 'Homepage'})
+})
+
 // Start server
 app.set('port', 3000);
 app.listen(app.get('port'), () => {
