@@ -1,0 +1,47 @@
+<%- include('partials/header') %>
+<main>
+    <section class="image-navigation">
+        <a href="/quizpagina.html">
+            <div class="card" data-text="Quiz">
+                <img src="assets/fifaquiz.jpg" alt="Fifa quiz">
+            </div>
+        </a>
+        <a href="/teams.html">
+            <div class="card" data-text="Clubs">
+                <img src="assets/fifateams.jpg" alt="Fifa quiz">
+            </div>
+        </a>
+        <a href="/competities.html">
+            <div class="card" data-text="Competities">
+                <img src="assets/competities.png" alt="Fifa quiz">
+            </div>
+        </a>
+        <a href="/tussenpaginablacklist.html">
+            <div class="card" data-text="Blacklisted">
+                <img src="assets/blacklistedfifa.jpg" alt="Fifa quiz">
+            </div>
+        </a>
+        <a href="/tussenpaginafavoriet.html">
+            <div class="card" data-text="Favoriet">
+                <img src="assets/favoritefifa.jpg" alt="Fifa quiz">
+            </div>
+        </a>
+    </section>
+</main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        
+        const currentPage = window.location.pathname.split("/").pop();
+
+      
+        const navLinks = document.querySelectorAll("nav ul li a");
+
+        navLinks.forEach(link => {
+            if (link.getAttribute("href") === currentPage) {
+                link.classList.add("active"); 
+            }
+        });
+    });
+</script>
+<%- include("partials/footer") %>
