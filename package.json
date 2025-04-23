@@ -4,6 +4,7 @@
   "description": "��#\u0000 \u0000V\u0000A\u0000R\u0000-\u0000U\u0000n\u0000i\u0000t\u0000e\u0000d\u0000\r\u0000 \u0000",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "start": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -17,5 +18,34 @@
   "dependencies": {
     "express": "^5.1.0",
     "mongodb": "^6.16.0"
+=======
+    "start" : "nodemon server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MohaHadji03/VAR-United.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MohaHadji03/VAR-United/issues"
+  },
+  "homepage": "https://github.com/MohaHadji03/VAR-United#readme",
+  "devDependencies": {
+    "@types/ejs": "^3.1.5",
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.14.1",
+    "@types/readline-sync": "^1.4.8",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "mongodb": "^6.16.0",
+    "readline-sync": "^1.4.10"
+>>>>>>> bf728fc3def2fbe2425d5b32044f311b7ae1d10f
   }
 }
