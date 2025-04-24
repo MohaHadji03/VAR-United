@@ -13,20 +13,7 @@
     <link rel="icon" type="" href="/assets/logoCropped.png">
 </head>
 
-<body>
-    <header>
-        <img src="/assets/logoCropped.png" alt="logo">
-        <nav>
-            <!-- Navigation links if any -->
-        </nav>
-        <div class="right-section">
-            <ul class="auth-links">
-                <li><a href="/login" class="login">Login</a></li>
-                <li><a href="/register" class="register">Registreer</a></li>
-            </ul>
-        </div>
-    </header>
-
+<%- include("partials/header") %>
     <main>
         <section class="image-gallery">
             <a href="#">
@@ -62,4 +49,5 @@
         </section>
     </main>
     
+    <%- include("partials/footer") %>
 <%- include('partials/footer') %>
