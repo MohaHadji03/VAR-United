@@ -1,21 +1,22 @@
 <%- include('partials/header') %>
+
 <main class="register-container">
-    <form class="register-form">
-        <p class="title">Registreer </p>
+    <form class="register-form" action="/register" method="POST">
+        <p class="title">Registreer</p>
         <p class="message">Meld je nu aan en krijg volledige toegang tot de game</p>
 
         <label>
-            <input required type="text" class="input">
+            <input required type="text" name="username" class="input">
             <span>Gebruikersnaam</span>
         </label>
 
         <label>
-            <input required type="email" class="input">
+            <input required type="email" name="email" class="input">
             <span>Email</span>
         </label>
 
         <label>
-            <input required type="password" class="input" id="password">
+            <input required type="password" name="password" class="input" id="password">
             <span>Wachtwoord</span>
             <div class="password-requirements">
                 <i class="fas fa-info-circle"></i>
@@ -33,12 +34,13 @@
         </label>
 
         <label>
-            <input required type="password" class="input" id="confirm-password">
+            <input required type="password" name="confirmPassword" class="input" id="confirm-password">
             <span>Verifieër wachtwoord</span>
         </label>
 
-        <button class="submit">Submit</button>
-        <p class="signin">Heb je al een account ? <a href="/login.html">Log-in</a> </p>
+        <button type="submit" class="submit">Submit</button>
+        <p class="signin">Heb je al een account ? <a href="/login">Log-in</a> </p>
     </form>
 </main>
+
 <%- include("partials/footer") %>

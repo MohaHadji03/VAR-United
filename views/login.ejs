@@ -1,23 +1,23 @@
 <%- include('partials/header') %>
+
 <main class="login-container">
-    <form class="form-login">
+    <form class="form-login" action="/login" method="POST">
         <p class="title">Login</p>
         <p class="message">Log je nu in en krijg volledige toegang tot de game</p>
 
         <label>
-            <input type="text" class="input" required>
+            <input type="text" name="username" class="input" required>
             <span>Gebruikersnaam</span>
         </label>
 
-       <label>
-        <input type="password" class="input" id="password" required>
-        <span>Wachtwoord</span>
-       </label>
-        
-        <button class="submit">Login</button>
-        <p  class="signin">ik heb geen account <a href="register.html">Registreer</a></p>
-        
+        <label>
+            <input type="password" name="password" class="input" id="password" required>
+            <span>Wachtwoord</span>
+        </label>
 
+        <button type="submit" class="submit">Login</button>
+        <p class="signin">ik heb geen account <a href="/register">Registreer</a></p>
     </form>
 </main>
+
 <%- include("partials/footer") %>
