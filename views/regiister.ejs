@@ -1,0 +1,44 @@
+<%- include('partials/header') %>
+<main class="register-container">
+    <form class="register-form">
+        <p class="title">Registreer </p>
+        <p class="message">Meld je nu aan en krijg volledige toegang tot de game</p>
+
+        <label>
+            <input required type="text" class="input">
+            <span>Gebruikersnaam</span>
+        </label>
+
+        <label>
+            <input required type="email" class="input">
+            <span>Email</span>
+        </label>
+
+        <label>
+            <input required type="password" class="input" id="password">
+            <span>Wachtwoord</span>
+            <div class="password-requirements">
+                <i class="fas fa-info-circle"></i>
+                <div class="tooltip">
+                    Wachtwoord vereisten:
+                    <ul>
+                        <li>Minimaal 8 tekens</li>
+                        <li>Minstens 1 hoofdletter</li>
+                        <li>Minstens 1 kleine letter</li>
+                        <li>Minstens 1 nummer</li>
+                        <li>Minstens 1 speciaal teken (!@#$%^&*)</li>
+                    </ul>
+                </div>
+            </div>
+        </label>
+
+        <label>
+            <input required type="password" class="input" id="confirm-password">
+            <span>Verifieër wachtwoord</span>
+        </label>
+
+        <button class="submit">Submit</button>
+        <p class="signin">Heb je al een account ? <a href="/login.html">Log-in</a> </p>
+    </form>
+</main>
+<%- include("partials/footer") %>
