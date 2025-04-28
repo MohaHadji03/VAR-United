@@ -601,9 +601,12 @@ nav ul li a.active {
 .image-navigation {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  min-height: 100vh;
+  min-height: 80vh;
   width: auto;
   overflow: hidden;
+  gap: 10px;
+  margin: 20px;
+
 }
 
 .card {
