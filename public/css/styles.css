@@ -19,6 +19,15 @@ body {
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr auto;
   height: 100%;
+
+  margin: 0;
+  padding: 0;
+  background-image: url('/assets/stadiumblauw.avif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 110vh;
+  color: white; 
 }
 
 .content-container {
@@ -592,9 +601,12 @@ nav ul li a.active {
 .image-navigation {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  min-height: 100vh;
+  min-height: 80vh;
   width: auto;
   overflow: hidden;
+  gap: 10px;
+  margin: 20px;
+
 }
 
 .card {
