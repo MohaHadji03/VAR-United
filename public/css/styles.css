@@ -19,6 +19,15 @@ body {
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr auto;
   height: 100%;
+
+  margin: 0;
+  padding: 0;
+  background-image: url('/assets/stadiumblauw.avif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 110vh;
+  color: white; 
 }
 
 .content-container {
