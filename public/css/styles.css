@@ -13,6 +13,12 @@ body {
   margin: 0;
 }
 
+:root {
+  --primary-color: #002571;
+  --secondary-color: #ffffff;
+  --tertiary-color: #0075d5;
+}
+
 body {
   font-family: "Baloo Bhai 2";
   display: grid;
@@ -39,15 +45,15 @@ body {
 }
 
 h1 {
-  color: #002571;
+  color: var(--primary-color);
 }
 
 h2 {
-  color: #0075d5;
+  color: var(--tertiary-color);
 }
 
 header {
-  background: linear-gradient(135deg, #002571, #0075d5);
+  background: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
   padding: 1rem 1.5rem;
   display: flex;
   align-items: center;
@@ -74,8 +80,8 @@ header img {
 }
 
 footer {
-  background: linear-gradient(135deg, #002571, #0075d5);
-  color: white;
+  background: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
+  color: var(--secondary-color);
   text-align: center;
   padding: 20px 0;
   margin-top: 50px;
@@ -102,7 +108,7 @@ footer {
 
 .footer-links a,
 .footer-socials a {
-  color: white;
+  color: var(--secondary-color);
   text-decoration: none;
   font-size: 1rem;
   transition: color 0.3s ease-in-out;
@@ -139,7 +145,7 @@ nav ul li {
 
 nav ul li a {
   text-decoration: none;
-  color: white;
+  color: var(--secondary-color);
   font-size: 1rem;
   transition: color 0.3s;
   text-transform: uppercase;
@@ -163,19 +169,19 @@ nav ul li a.active {
   text-decoration: none;
   font-size: 1rem;
   padding: 0.3rem 0.8rem;
-  border: 1px solid white;
+  border: 1px solid var(--secondary-color);
   border-radius: 8px;
   box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
 }
 
 .login {
-  background-color: #0075d5;
-  color: white;
+  background-color: var(--tertiary-color);
+  color: var(--secondary-color);
 }
 
 .login:hover {
-  background-color: white;
+  background-color: var(--secondary-color);
   color: black;
   box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
 }
@@ -188,7 +194,7 @@ nav ul li a.active {
   flex-direction: column;
   gap: 10px;
   max-width: 400px;
-  background-color: #fff;
+  background-color: var(--secondary-color);
   padding: 50px;
   border-radius: 20px;
   position: relative;
@@ -212,7 +218,7 @@ nav ul li a.active {
   outline: 0;
   border: 1px solid rgba(105, 105, 105, 0.397);
   border-radius: 10px;
-  background-color: white;
+  background-color: var(--secondary-color);
   position: relative;
   z-index: 1;
 }
@@ -225,7 +231,7 @@ nav ul li a.active {
   font-size: 0.9em;
   cursor: text;
   transition: 0.3s ease;
-  background-color: white;
+  background-color: var(--secondary-color);
   padding: 0 5px;
   z-index: 2;
 }
@@ -243,7 +249,7 @@ nav ul li a.active {
 }
 
 .form-login label .input:valid+span {
-  color: green;
+  color: var(--primary-color);
 }
 
 
@@ -254,7 +260,7 @@ nav ul li a.active {
   flex-direction: column;
   gap: 10px;
   max-width: 400px;
-  background-color: #fff;
+  background-color: var(--secondary-color);
   padding: 50px;
   border-radius: 20px;
   position: relative;
@@ -265,7 +271,7 @@ nav ul li a.active {
 
 .title {
   font-size: 28px;
-  color: #0075d5;
+  color: var(--tertiary-color);
   font-weight: 600;
   letter-spacing: -1px;
   position: relative;
@@ -280,7 +286,7 @@ nav ul li a.active {
   content: "";
   border-radius: 50%;
   left: 0px;
-  background-color: #0075d5;
+  background-color: var(--tertiary-color);
 }
 
 .title::before {
@@ -305,11 +311,11 @@ nav ul li a.active {
 }
 
 .signin a {
-  color: #0075d5;
+  color: var(--tertiary-color);
 }
 
 .signin a:hover {
-  text-decoration: underline #0075d5;
+  text-decoration: underline var(--tertiary-color);
 }
 
 .register-form label {
@@ -325,7 +331,7 @@ nav ul li a.active {
   outline: 0;
   border: 1px solid rgba(105, 105, 105, 0.397);
   border-radius: 10px;
-  background-color: white;
+  background-color: var(--secondary-color);
   position: relative;
   z-index: 1;
 }
@@ -338,7 +344,7 @@ nav ul li a.active {
   font-size: 0.9em;
   cursor: text;
   transition: 0.3s ease;
-  background-color: white;
+  background-color: var(--secondary-color);
   padding: 0 5px;
   z-index: 2;
 }
@@ -356,16 +362,16 @@ nav ul li a.active {
 }
 
 .register-form label .input:valid+span {
-  color: green;
+  color: var(--secondary-color);
 }
 
 .submit {
   border: none;
   outline: none;
-  background-color: #0075d5;
+  background-color: var(--tertiary-color);
   padding: 10px;
   border-radius: 10px;
-  color: #fff;
+  color: var(--secondary-color);
   font-size: 16px;
   transition: .3s ease;
   text-align: center;
@@ -381,7 +387,7 @@ nav ul li a.active {
 }
 
 .password-requirements .fa-info-circle {
-  color: #0075d5;
+  color: var(--tertiary-color);
   cursor: pointer;
 }
 
@@ -389,7 +395,7 @@ nav ul li a.active {
   display: none;
   position: absolute;
   background-color: #333;
-  color: white;
+  color: var(--secondary-color);
   padding: 10px;
   border-radius: 6px;
   width: 250px;
@@ -437,7 +443,7 @@ nav ul li a.active {
 }
 
 .register {
-  background-color: white;
+  background-color: var(--secondary-color);
   color: black;
 }
 
@@ -494,7 +500,7 @@ nav ul li a.active {
   display: grid;
   place-items: center;
   border-radius: 50%;
-  color: rgba(255, 255, 255, 0.878);
+  color: var(--secondary-color);
   border: 1px solid rgba(156, 156, 156, 0.256);
 }
 
@@ -574,7 +580,7 @@ nav ul li a.active {
 
 #aboutus h3 {
   font-size: 2vw;
-  color: #0075d5;
+  color: var(--tertiary-color);
 }
 
 .list {
@@ -584,7 +590,7 @@ nav ul li a.active {
 }
 
 #aboutus section {
-  border-bottom: 2px solid #002571;
+  border-bottom: 2px solid var(--primary-color);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
@@ -642,7 +648,7 @@ nav ul li a.active {
   width: 100%;
   height: 100%;
   background: linear-gradient(320deg, rgba(0, 37, 113, 0.8) 30%, rgba(0, 117, 213, 0.8) 88%);
-  color: white;
+  color: var(--secondary-color);
   font-size: 2rem;
   font-weight: bold;
   text-transform: uppercase;
@@ -683,7 +689,7 @@ nav ul li a.active {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background: #f0f0f0;
+  background: var(--secondary-color);
 }
 
 .back-arrow {
@@ -700,7 +706,7 @@ nav ul li a.active {
 }
 
 .blacklist-club {
-  border: 1px solid #ccc;
+  border: 1px solid var(--secondary-color);
   padding: 20px;
   width: 200px;
   text-align: center;
@@ -720,10 +726,10 @@ button {
 .remove-btn {
   border: none;
   outline: none;
-  background-color: #002571;
+  background-color: var(--primary-color);
   padding: 10px;
   border-radius: 10px;
-  color: #fff;
+  color: var(--secondary-color);
   font-size: 16px;
   transition: .3s ease;
   text-align: center;
@@ -732,10 +738,10 @@ button {
 .edit-btn {
   border: none;
   outline: none;
-  background-color: #0075d5;
+  background-color: var(--tertiary-color);
   padding: 10px;
   border-radius: 10px;
-  color: #fff;
+  color: var(--secondary-color);
   font-size: 16px;
   transition: .3s ease;
   text-align: center;
@@ -825,7 +831,7 @@ button {
   border-radius: 8px;
   background: #777;
   border: none;
-  color: white;
+  color: var(--secondary-color);
 }
 
 .comp__card__buttons {
@@ -933,8 +939,8 @@ button {
 
 .between-card:hover::after {
   content: attr(data-text);
-  color: white;
-  background: linear-gradient(320deg, #002571 30%, #0075d5 88%);
+  color: var(--secondary-color);
+  background: linear-gradient(320deg, var(--primary-color) 30%, var(--tertiary-color) 88%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -964,8 +970,8 @@ body.quiz-page {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background: linear-gradient(320deg, #002571 30%, #0075d5 88%);
-  color: white;
+  background: linear-gradient(320deg, var(--primary-color) 30%, var(--tertiary-color) 88%);
+  color: var(--secondary-color);
   margin: 0;
   position: relative;
   padding: 10px;
@@ -1012,7 +1018,7 @@ body.quiz-page {
   padding: 12px;
   margin: 5px 0;
   background: #ffcc00;
-  color: #002571;
+  color: var(--primary-color);
   font-weight: bold;
   border: none;
   border-radius: 5px;
@@ -1028,12 +1034,12 @@ body.quiz-page {
 
 .correct {
   background: #28a745 !important;
-  color: white;
+  color: var(--secondary-color);
 }
 
 .incorrect {
   background: #dc3545 !important;
-  color: white;
+  color: var(--secondary-color);
 }
 
 .quiz-result {
@@ -1058,7 +1064,7 @@ body.quiz-page {
   margin: 10px;
   padding: 10px 20px;
   background: #ffcc00;
-  color: #002571;
+  color: var(--primary-color);
   font-weight: bold;
   text-decoration: none;
   border-radius: 5px;
@@ -1095,7 +1101,7 @@ body.quiz-page {
 }
 .error-page p {
   font-size: 1.2em;
-  color: white;
+  color: var(--secondary-color);
   margin-bottom: 20px;
 }
 .error-page .quiz-buttons {
@@ -1108,7 +1114,7 @@ body.quiz-page {
   display: inline-block;
   padding: 12px 24px;
   background: #ffcc00;
-  color: #002571;
+  color: var(--primary-color);
   font-weight: bold;
   text-decoration: none;
   border-radius: 8px;
