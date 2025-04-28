@@ -1,0 +1,137 @@
+<%- include('partials/header') %>
+<main>
+
+    <section class="comp__container">
+        
+        <section class="comp__card">
+            <section class="card__icon">
+                <img src="/assets/Bundesliga.png" alt="Bundesliga">
+            </section>
+
+            <section class="comp__card__content">
+                <section class="comp__card__text">
+                    <p class="comp__card__title">Bundesliga</p>
+                    <p class="comp__card__description">De Bundesliga is de hoogste Duitse voetbalcompetitie,
+                        opgericht in 1963, en staat bekend om zijn aanvallende speelstijl en gepassioneerde fans.
+                        Bayern München is de meest succesvolle club, maar teams zoals Borussia Dortmund en RB
+                        Leipzig zorgen voor spannende concurrentie.</p>
+
+                        <br>
+                        <p>Reden: ik haat de teams en de fans</p>
+                        <br>
+                </section>
+
+                <section class="comp__card__buttons">
+                    <button class="comp__card__button">verwijderen</button>
+                    <button class="comp__card__button secondary">reden aanpassen</button>
+                </section>
+            </section>
+        </section>
+
+       
+        <section class="comp__card">
+            <section class="card__icon">
+                <img src="/assets/Premier_league.png" alt="Eintracht Frankfurt">
+            </section>
+
+            <section class="comp__card__content">
+                <section class="comp__card__text">
+                    <p class="comp__card__title">Premier league</p>
+                    <p class="comp__card__description">De Premier League is de hoogste Engelse voetbalcompetitie,
+                        opgericht in 1992, en wereldwijd bekend om zijn intensiteit en competitieve clubs. Met
+                        topteams zoals Manchester United, Liverpool en Manchester City trekt de competitie miljoenen
+                        fans en genereert enorme inkomsten.</p>
+                        <br>
+                        <p>Reden: ik haat de teams en de fans</p>
+                        <br>
+                </section>
+
+                <section class="comp__card__buttons">
+                    <button class="comp__card__button">verwijderen</button>
+                    <button class="comp__card__button secondary">reden aanpassen</button>
+                </section>
+            </section>
+        </section>
+
+   
+        <section class="comp__card">
+            <section class="card__icon">
+                <img src="/assets/LaLiga.png" alt="LaLiga">
+            </section>
+
+            <section class="comp__card__content">
+                <section class="comp__card__text">
+                    <p class="comp__card__title">LaLiga</p>
+                    <p class="comp__card__description">La Liga is de hoogste Spaanse voetbalcompetitie, opgericht in
+                        1929, en staat bekend om technisch hoogstaand voetbal en intense rivaliteiten. Clubs als FC
+                        Barcelona en Real Madrid domineren historisch gezien de competitie, die wereldwijd miljoenen
+                        fans trekt.</p>
+                        <br>
+                        <p>Reden: ik haat de teams en de fans</p>
+                        <br>
+                </section>
+
+        
+
+                <section class="comp__card__buttons">
+                    <button class="comp__card__button">verwijderen</button>
+                    <button class="comp__card__button secondary">reden aanpassen</button>
+                </section>
+            </section>
+        </section>
+    </section>
+
+</main>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-logo">
+            <a href="fifaHomePage.html"><img src="assets/logoCropped.png" alt="Logo"></a>
+        </div>
+        <div class="footer-links">
+            <a href="aboutus.html">About Us</a>
+        </div>
+        <div class="footer-socials">
+            <a href="#" target="_blank">Facebook</a>
+            <a href="#" target="_blank">Twitter</a>
+            <a href="#" target="_blank">Instagram</a>
+        </div>
+        <p class="footer-copy">&copy; 2025 VAR United. All rights reserved.</p>
+    </div>
+</footer>
+
+  <script> 
+    document.addEventListener("DOMContentLoaded", function () {
+        const container = document.querySelector(".comp__container");
+
+        container.addEventListener("click", function (event) {
+            
+            if (event.target.classList.contains("comp__card__button") && !event.target.classList.contains("secondary")) {
+                const card = event.target.closest(".comp__card");
+                if (card) {
+                    card.remove();
+                }
+
+               
+                if (document.querySelectorAll(".comp__card").length === 0) {
+                    alert("Je moet de quiz spelen!");
+                }
+            }
+
+            if (event.target.classList.contains("secondary")) {
+            const card = event.target.closest(".comp__card");
+            const reasonParagraph = card.querySelector(".comp__card__text p:last-of-type"); // Pak de laatste <p> (reden)
+
+            if (reasonParagraph) {
+                let nieuweReden = prompt("Voer een nieuwe reden in:", reasonParagraph.textContent.replace("Reden: ", ""));
+                if (nieuweReden !== null) {
+                    reasonParagraph.textContent = "Reden: " + nieuweReden;
+                }
+            }
+        }
+        });
+    });
+</script>
+</body>
+
+</html>
