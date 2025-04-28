@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/MohaHadji03/VAR-United#readme",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/connect-mongodb-session": "^2.4.8",
     "@types/dotenv": "^8.2.3",
     "@types/ejs": "^3.1.5",
     "@types/express": "^5.0.1",
@@ -29,9 +31,13 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "@types/express-session": "^1.18.1",
+    "bcrypt": "^5.1.1",
+    "connect-mongodb-session": "^5.0.0",
     "dotenv": "^16.5.0",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
+    "express-session": "^1.18.1",
     "mongodb": "^6.16.0",
     "readline-sync": "^1.4.10"
   }
