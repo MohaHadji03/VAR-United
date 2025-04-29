@@ -22,6 +22,15 @@ app.get('/home', (req, res) => {
     res.render('fifahomepage', { title: 'Homepage' });
 });
 
+app.get('/login', (req, res) => {
+    res.render('login', { title: 'login' });
+});
+
+app.get('/register', (req, res) => {
+    res.render('register', { title: 'register' });
+});
+
+
 // New API call route (with fetch)
 app.get('/clubs', async (req, res) => {
     try {
