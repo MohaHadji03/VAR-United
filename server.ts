@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import { title } from 'process';
 
 // Create express app
 const app = express();
@@ -30,6 +31,15 @@ app.get('/register', (req, res) => {
     res.render('register', { title: 'register' });
 });
 
+//quiz routes
+
+app.get('/quizpagina', (req, res)=> {
+    res.render('quizpagina', {title: 'Quiz'});
+});
+
+app.get('/playersquiz',(req, res)=> {
+    res.render('player-quiz', {title: 'Speler Quiz'})
+})
 
 // New API call route (with fetch)
 app.get('/clubs', async (req, res) => {
