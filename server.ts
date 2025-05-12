@@ -1,6 +1,6 @@
 import express from 'express';
 import path from 'path';
-import { title } from 'process';
+import { connect } from './database';
 
 // Create express app
 const app = express();
@@ -43,35 +43,12 @@ app.get('/playersquiz',(req, res)=> {
 
 // New API call route (with fetch)
 app.get('/clubs', async (req, res) => {
-    try {
-        const response = await fetch('https://api.futdatabase.com/api/clubs?page=1', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'X-AUTH-TOKEN': '935cf4ae-9fa8-f4b1-7a80-357dc7c947ea',
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error(`API call failed with status ${response.status}`);
-        }
-
-        const clubs = await response.json();
-
-        // Option 1: Return JSON directly
-        res.json(clubs);
-
-        // Option 2: To render a view
-        // res.render('clubs', { title: 'Clubs', clubs: clubs });
-
-    } catch (error) {
-        console.error('Error fetching clubs:', error);
-        res.status(500).send('Error fetching clubs');
-    }
+    
 });
 
 // Start server
 app.set('port', 3000);
-app.listen(app.get('port'), () => {
+app.listen(app.get('port'), async () => {
+    await connect();
     console.log('[server] http://localhost:' + app.get('port'));
 });
