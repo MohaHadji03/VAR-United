@@ -213,6 +213,7 @@ nav ul li a.active {
 }
 
 .form-login label .input {
+  color: var(--primary-color);
   width: 100%;
   padding: 10px 10px 20px 10px;
   outline: 0;
@@ -256,6 +257,7 @@ nav ul li a.active {
 /* Register */
 
 .register-form {
+  color: var(--primary-color);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -362,7 +364,7 @@ nav ul li a.active {
 }
 
 .register-form label .input:valid+span {
-  color: var(--secondary-color);
+  color: var(--primary-color);
 }
 
 .submit {
