@@ -17,6 +17,12 @@ const saltRounds: number = 10;
 
 export async function loadClubData() {
     try {
+        const existingCount = await clubCollection.countDocuments();
+        if (existingCount > 0) {
+            console.log("📦 Club data already exists, skipping fetch.");
+            return;
+        }
+
         const totalPages = 3; 
         const allClubs: Club[] = [];
 
@@ -34,27 +40,26 @@ export async function loadClubData() {
             }
 
             const data = await response.json();
-            const clubs: Club[] = data.items;
-
-            allClubs.push(...clubs);
+            allClubs.push(...data.items);
         }
 
-        if (allClubs.length > 0) {
-           // await clubCollection.deleteMany({}); 
-            await clubCollection.insertMany(allClubs);
-            console.log(`✅ ${allClubs.length} clubs inserted successfully from ${totalPages} pages`);
-        } else {
-            console.log("⚠️ No club data to load.");
-        }
+        await clubCollection.insertMany(allClubs);
+        console.log(`✅ ${allClubs.length} clubs inserted successfully`);
 
     } catch (error) {
         console.error('❌ Error fetching clubs:', error);
     }
 }
 
-export async function loadLeagueData(){
+export async function loadLeagueData() {
     try {
-        const totalPages = 3; 
+        const existingCount = await leagueCollection.countDocuments();
+        if (existingCount > 0) {
+            console.log("📦 League data already exists, skipping fetch.");
+            return;
+        }
+
+        const totalPages = 3;
         const allLeagues: League[] = [];
 
         for (let page = 1; page <= totalPages; page++) {
@@ -71,18 +76,11 @@ export async function loadLeagueData(){
             }
 
             const data = await response.json();
-            const leagues: League[] = data.items;
-
-            allLeagues.push(...leagues);
+            allLeagues.push(...data.items);
         }
 
-        if (allLeagues.length > 0) {
-           //  await clubCollection.deleteMany({}); 
-            await leagueCollection.insertMany(allLeagues);
-            console.log(`✅ ${allLeagues.length} leagues inserted successfully from ${totalPages} pages`);
-        } else {
-            console.log("⚠️ No league data to load.");
-        }
+        await leagueCollection.insertMany(allLeagues);
+        console.log(`✅ ${allLeagues.length} leagues inserted successfully`);
 
     } catch (error) {
         console.error('❌ Error fetching leagues:', error);
@@ -91,7 +89,13 @@ export async function loadLeagueData(){
 
 export async function loadPlayerData() {
     try {
-        const totalPages = 3; // of meer als je later uitbreidt
+        const existingCount = await playerCollection.countDocuments();
+        if (existingCount > 0) {
+            console.log("📦 Player data already exists, skipping fetch.");
+            return;
+        }
+
+        const totalPages = 3;
         const allPlayers: Player[] = [];
 
         for (let page = 1; page <= totalPages; page++) {
@@ -108,19 +112,16 @@ export async function loadPlayerData() {
             }
 
             const data = await response.json();
-            const players: Player[] = data.items;
-
-            allPlayers.push(...players);
+            allPlayers.push(...data.items);
         }
 
-       //  await playerCollection.deleteMany({});
         await playerCollection.insertMany(allPlayers);
         console.log(`✅ ${allPlayers.length} players inserted successfully`);
-     } catch (error) {
-        console.error('❌ Error fetching clubs:', error);
+
+    } catch (error) {
+        console.error('❌ Error fetching players:', error);
     }
 }
-
 
 export async function login(username: string, password: string) {
     if (username === "" || password === "") {
@@ -164,10 +165,23 @@ export async function register(username: string, email: string, password: string
     return;
 }
 
+export async function wipeDatabase() {
+    try {
+        await clubCollection.deleteMany({});
+        await leagueCollection.deleteMany({});
+        await playerCollection.deleteMany({});
+        await userCollection.deleteMany({});
+        console.log('🗑️ Alle data succesvol verwijderd uit de database.');
+    } catch (error) {
+        console.error('❌ Fout bij verwijderen van data:', error);
+    }
+}
+
 export async function connect() {
     try {
         await client.connect();
         console.log('Connected to MongoDB');
+        // await wipeDatabase();
         await loadClubData();
         await loadLeagueData();
         await loadPlayerData();
