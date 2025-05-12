@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+
+<main>
+    <section class="comp__container">
+        <% clubs.forEach(club => { %>
+            <section class="comp__card">
+                <section class="card__icon">
+                    <img src="/clubs/<%= club.id %>/logo" alt="<%= club.name %>" onerror="this.src='/assets/default-club-logo.png';">
+                </section>
+
+                <section class="comp__card__content">
+                    <section class="comp__card__text">
+                        <p class="comp__card__title"><%= club.name %></p>
+                        <p class="comp__card__description">
+                            <% if (club.league) { %>
+                                Speelt in competitie ID: <%= club.league %>
+                            <% } else { %>
+                                Geen competitie informatie beschikbaar.
+                            <% } %>
+                        </p>
+                    </section>
+
+                    <section class="comp__card__buttons">
+                        <button class="comp__card__button">Blacklist</button>
+                        <button class="comp__card__button secondary">Favoriet</button>
+                    </section>
+                </section>
+            </section>
+        <% }); %>
+    </section>
+</main>
+
+<%- include('partials/footer') %>
