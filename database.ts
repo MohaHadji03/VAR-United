@@ -25,7 +25,7 @@ export async function loadClubData() {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
-                    'X-AUTH-TOKEN': '935cf4ae-9fa8-f4b1-7a80-357dc7c947ea',
+                    'X-AUTH-TOKEN': process.env.FUTDB_API_TOKEN!
                 },
             });
 
@@ -40,7 +40,7 @@ export async function loadClubData() {
         }
 
         if (allClubs.length > 0) {
-            await clubCollection.deleteMany({}); 
+           // await clubCollection.deleteMany({}); 
             await clubCollection.insertMany(allClubs);
             console.log(`✅ ${allClubs.length} clubs inserted successfully from ${totalPages} pages`);
         } else {
@@ -62,7 +62,7 @@ export async function loadLeagueData(){
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
-                    'X-AUTH-TOKEN': '935cf4ae-9fa8-f4b1-7a80-357dc7c947ea',
+                    'X-AUTH-TOKEN': process.env.FUTDB_API_TOKEN!
                 },
             });
 
@@ -77,7 +77,7 @@ export async function loadLeagueData(){
         }
 
         if (allLeagues.length > 0) {
-            await clubCollection.deleteMany({}); 
+           //  await clubCollection.deleteMany({}); 
             await leagueCollection.insertMany(allLeagues);
             console.log(`✅ ${allLeagues.length} leagues inserted successfully from ${totalPages} pages`);
         } else {
@@ -99,7 +99,7 @@ export async function loadPlayerData() {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
-                    'X-AUTH-TOKEN': '935cf4ae-9fa8-f4b1-7a80-357dc7c947ea',
+                    'X-AUTH-TOKEN': process.env.FUTDB_API_TOKEN!
                 },
             });
 
@@ -113,7 +113,7 @@ export async function loadPlayerData() {
             allPlayers.push(...players);
         }
 
-        await playerCollection.deleteMany({});
+       //  await playerCollection.deleteMany({});
         await playerCollection.insertMany(allPlayers);
         console.log(`✅ ${allPlayers.length} players inserted successfully`);
      } catch (error) {
