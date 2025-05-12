@@ -5,7 +5,7 @@ import { UserModel } from './interface'; // your future user model interface
 
 dotenv.config();
 
-const MONGODB_URI = process.env.MONGO_URI ?? 'mongodb://localhost:27017';
+const MONGODB_URI = process.env.MONGO_URI!;
 export const client = new MongoClient(MONGODB_URI);
 
 export const userCollection: Collection<UserModel> = client.db('VAR-United-db').collection<UserModel>('users');
