@@ -181,7 +181,7 @@ export async function connect() {
     try {
         await client.connect();
         console.log('Connected to MongoDB');
-        // await wipeDatabase();
+        await wipeDatabase();
         await loadClubData();
         await loadLeagueData();
         await loadPlayerData();
