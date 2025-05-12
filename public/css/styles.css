@@ -28,11 +28,11 @@ body {
 
   margin: 0;
   padding: 0;
-  background-image: url('/assets/stadiumblauw.avif');
+  background-image: url('/assets/staduim.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 105vh;
+  height: 110%;
   color: white; 
 }
 
