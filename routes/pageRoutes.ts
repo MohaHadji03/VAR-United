@@ -4,6 +4,7 @@ import { isAuthenticated } from "../middleware/secureMiddleware";
 import { connect} from '../database';
 import { title } from "process";
 import { homedir } from "os";
+import { render } from "ejs";
 
 
 export function pageRoutes() {
@@ -24,7 +25,7 @@ export function pageRoutes() {
     
             const userId = new ObjectId(userIdString);
     
-            res.render("/home", {
+            res.render("fifahomepage", {
                 currentPage: 'fifahomepage',
                 title: 'home',
                 user: req.session.user ?? null
