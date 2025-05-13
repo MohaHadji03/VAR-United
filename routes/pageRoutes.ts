@@ -2,6 +2,8 @@ import express, { Request, Response, NextFunction } from "express";
 import { ObjectId } from "mongodb";
 import { isAuthenticated } from "../middleware/secureMiddleware";
 import { connect} from '../database';
+import { title } from "process";
+import { homedir } from "os";
 
 
 export function pageRoutes() {
@@ -22,8 +24,9 @@ export function pageRoutes() {
     
             const userId = new ObjectId(userIdString);
     
-            res.render("homepage", {
-                currentPage: 'home',
+            res.render("/home", {
+                currentPage: 'fifahomepage',
+                title: 'home',
                 user: req.session.user ?? null
             });
         } catch (error) {
