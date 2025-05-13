@@ -8,7 +8,7 @@ import { FlashMessage, UserModel } from "./interface";
 const MongoDBStore = connectMongo(session);
 
 const mongoStore = new MongoDBStore({
-    uri: process.env.MONGODB_URI ?? "mongodb://localhost:27017/VAR-United-db",
+    uri: process.env.MONGO_URI ?? "mongodb://localhost:27017/VAR-United-db",
     collection: "sessions",
     databaseName: "VAR-United-db",
 });
