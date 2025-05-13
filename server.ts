@@ -5,7 +5,6 @@ import { sessionMiddleware } from './session';
 import { flashMiddleware } from './middleware/flashMiddleware';
 import { loginRouter } from './routes/loginRoutes';
 import { pageRoutes } from  './routes/pageRoutes';
-import { connect } from './database';
 
 
 // Create express app
@@ -26,10 +25,7 @@ app.use(loginRouter());
 app.use(pageRoutes());
 
 
-// Start server
-app.set('port', 3000);
-app.listen(app.get('port'), async () => {
-    await connect();
+
 app.listen(app.get('port'), async () => {
     await connect();
     console.log('[server] http://localhost:' + app.get('port'));
