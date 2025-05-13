@@ -5,6 +5,7 @@ export interface UserModel {
     username: string;
     email: string;
     password: string;
+    image?: string;
 }
 
 export interface FlashMessage {

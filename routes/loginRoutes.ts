@@ -2,6 +2,7 @@ import express from "express";
 import { UserModel } from "../interface";
 import { login, register } from "../database";
 import { isAuthenticated } from "../middleware/secureMiddleware";
+import { title } from "process";
 
 export function loginRouter() {
     const router = express.Router();
@@ -9,7 +10,7 @@ export function loginRouter() {
         if(req.session.loggedIn) {
             res.redirect("/home");
         } else {
-            res.render('loginpage', { currentPage: 'login',  user: req.session.user });
+            res.render('login', { currentPage: 'login',title: 'login',  user: req.session.user });
         }
     });
 
@@ -38,7 +39,7 @@ export function loginRouter() {
     });
 
     router.get("/register", async (req, res) => {
-        res.render('registerpage', { currentPage: 'register',  user: req.session.user });
+        res.render('register', { currentPage: 'register',title: 'register',  user: req.session.user });
 
     });
 
