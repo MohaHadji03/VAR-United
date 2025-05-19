@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import { ObjectId } from "mongodb";
 import { isAuthenticated } from "../middleware/secureMiddleware";
-import { connect} from '../database';
+import { clubCollection, connect } from '../database';
 import { title } from "process";
 import { homedir } from "os";
 import { render } from "ejs";
@@ -17,14 +17,14 @@ export function pageRoutes() {
     router.get("/home", isAuthenticated, async (req: Request, res: Response) => {
         try {
             const userIdString = req.session.user?._id;
-    
+
             if (!userIdString) {
                 res.status(401).send("User not authenticated");
                 return;
             }
-    
+
             const userId = new ObjectId(userIdString);
-    
+
             res.render("fifahomepage", {
                 currentPage: 'fifahomepage',
                 title: 'home',
@@ -55,11 +55,14 @@ export function pageRoutes() {
     router.get('/blacklist', (req, res) => {
         res.render('tussenpaginablacklist', { currentPage: 'tussenpaginablacklist', title: 'Blacklist tussenpagina', user: req.session.user });
     });
-    
-router.get('/blacklist-clubs', (req, res) => {
+
+    router.get('/blacklist-clubs', (req, res) => {
         res.render('blacklist-clubs', { currentPage: 'blacklist-clubs', title: 'Blacklist Clubs', user: req.session.user });
     });
 
+    router.get('/404', (req, res) => {
+        res.render('404', { currentPage: '404', title: '404', user: req.session.user })
+    })
 
     router.get('/blacklist-competities', (req, res) => {
         res.render('blacklist-competities', { currentPage: 'blacklist-competities', title: 'Blacklist Competities', user: req.session.user });
@@ -81,8 +84,28 @@ router.get('/blacklist-clubs', (req, res) => {
         res.render('quizpagina', { currentPage: 'quizpagina', title: 'Quiz', user: req.session.user });
     });
 
-    router.get('/quiz-player', (req, res) => {
+    router.get("/clubquiz", async (req, res) => {
+        try {
+            const clubs = await clubCollection.find().toArray();
+
+            res.render("clubs-quiz", {
+                title: "Clubs Quiz", // ✅ hier toevoegen
+                currentPage: "clubs-quiz",
+                user: req.session.user ?? null,
+                clubs: clubs
+            });
+        } catch (err) {
+            console.error("Fout bij het ophalen van clubs:", err);
+            res.status(500).send("Interne serverfout");
+        }
+    });
+
+    router.get('/playerquiz', (req, res) => {
         res.render('player-quiz', { currentPage: 'player-quiz', title: 'Speler Quiz', user: req.session.user });
+    });
+
+    router.get('/competitiesquiz', (req, res) => {
+        res.render('competities-quiz', { currentPage: 'competities-quiz', title: 'Speler Quiz', user: req.session.user });
     });
 
     return router;
