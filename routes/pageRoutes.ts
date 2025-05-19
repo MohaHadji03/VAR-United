@@ -18,14 +18,14 @@ export function pageRoutes() {
     router.get("/home", isAuthenticated, async (req: Request, res: Response) => {
         try {
             const userIdString = req.session.user?._id;
-    
+
             if (!userIdString) {
                 res.status(401).send("User not authenticated");
                 return;
             }
-    
+
             const userId = new ObjectId(userIdString);
-    
+
             res.render("fifahomepage", {
                 currentPage: 'fifahomepage',
                 title: 'home',
@@ -95,11 +95,14 @@ export function pageRoutes() {
     router.get('/blacklist', (req, res) => {
         res.render('tussenpaginablacklist', { currentPage: 'tussenpaginablacklist', title: 'Blacklist tussenpagina', user: req.session.user });
     });
-    
-router.get('/blacklist-clubs', (req, res) => {
+
+    router.get('/blacklist-clubs', (req, res) => {
         res.render('blacklist-clubs', { currentPage: 'blacklist-clubs', title: 'Blacklist Clubs', user: req.session.user });
     });
 
+    router.get('/404', (req, res) => {
+        res.render('404', { currentPage: '404', title: '404', user: req.session.user })
+    })
 
     router.get('/blacklist-competities', (req, res) => {
         res.render('blacklist-competities', { currentPage: 'blacklist-competities', title: 'Blacklist Competities', user: req.session.user });
@@ -121,11 +124,9 @@ router.get('/blacklist-clubs', (req, res) => {
         res.render('quizpagina', { currentPage: 'quizpagina', title: 'Quiz', user: req.session.user });
     });
 
-    
     router.get('/quiz-player', (req, res) => {
         res.render('player-quiz', { currentPage: 'player-quiz', title: 'Speler Quiz', user: req.session.user });
     });
 
-    
     return router;
 }
