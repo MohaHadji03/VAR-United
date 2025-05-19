@@ -25,14 +25,15 @@ body {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr auto;
-  height: 100%;
+  height: auto;
 
   margin: 0;
   padding: 0;
   background-image: url(/assets/staduim.jpg);
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat
+  ;
 
   color: white; 
 }
