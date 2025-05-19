@@ -44,7 +44,7 @@ export function pageRoutes() {
     router.get('/clubs', async(req, res) => {
          try {
     const [clubs, leagues] = await Promise.all([
-      clubCollection.find<Club>({}).limit(50).toArray(),
+      clubCollection.find<Club>({}).limit(60).toArray(),
       leagueCollection
         .find<League>({}, { projection: { _id: 0, id: 1, name: 1 } })
         .toArray()
