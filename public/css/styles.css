@@ -36,7 +36,7 @@ body {
   background-repeat: no-repeat
   ;
 
-  color: white; 
+  color: white;
 }
 
 .content-container {
@@ -67,18 +67,18 @@ header {
 
 
 header img {
-  width: 8vw; 
-  max-width: 100px; 
-  min-width: 60px; 
-  height: auto; 
+  width: 8vw;
+  max-width: 100px;
+  min-width: 60px;
+  height: auto;
 }
 
 
 @media (max-width: 768px) {
   header img {
-      width: 15vw; 
-      max-width: 80px; 
-      min-width: 50px; 
+    width: 15vw;
+    max-width: 80px;
+    min-width: 50px;
   }
 }
 
@@ -643,7 +643,7 @@ nav ul li a.active {
 .card img {
   width: 100%;
   height: 100%;
-  object-fit: cover; 
+  object-fit: cover;
   transition: transform 0.3s ease-in-out;
 }
 
@@ -658,7 +658,7 @@ nav ul li a.active {
 
 
 .card::after {
-  content: attr(data-text); 
+  content: attr(data-text);
   position: absolute;
   bottom: 0;
   left: 0;
@@ -682,15 +682,15 @@ nav ul li a.active {
 
 @media (max-width: 768px) {
   .image-navigation {
-    grid-template-columns: 1fr; 
-    gap: 10px; 
-    padding: 10px 0; 
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 10px 0;
   }
 
   .card {
-    height: 50vh; 
-    border-radius: 10px; 
-    overflow: hidden; 
+    height: 50vh;
+    border-radius: 10px;
+    overflow: hidden;
   }
 }
 
@@ -878,8 +878,9 @@ button {
 
 .image-gallerys-quiz {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-  gap: 15px; /* Ruimte tussen de afbeeldingen */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 15px;
+  /* Ruimte tussen de afbeeldingen */
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
@@ -901,9 +902,9 @@ button {
 .between-card {
   position: relative;
   width: 100%;
-  height: 450px; 
+  height: 450px;
   overflow: hidden;
-  border-radius: 10px; 
+  border-radius: 10px;
   transition: transform 0.3s ease-in-out;
 }
 
@@ -967,11 +968,11 @@ button {
 
 @media (max-width: 768px) {
   .image-gallerys-quiz {
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr;
   }
 
   .between-card {
-    height: 250px; 
+    height: 250px;
   }
 }
 
@@ -1103,7 +1104,7 @@ body.quiz-page {
 }
 
 .error-page .quiz-container {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.4);
   padding: 30px;
   border-radius: 15px;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
@@ -1111,22 +1112,26 @@ body.quiz-page {
   max-width: 600px;
   backdrop-filter: blur(12px);
 }
+
 .error-page h1 {
   font-size: 2.5em;
   color: #FFD700;
   margin-bottom: 10px;
 }
+
 .error-page p {
   font-size: 1.2em;
   color: var(--secondary-color);
   margin-bottom: 20px;
 }
+
 .error-page .quiz-buttons {
   display: flex;
   justify-content: center;
   gap: 15px;
   margin-top: 20px;
 }
+
 .error-page .quiz-buttons a {
   display: inline-block;
   padding: 12px 24px;
@@ -1137,7 +1142,71 @@ body.quiz-page {
   border-radius: 8px;
   transition: background 0.3s, transform 0.2s;
 }
+
 .error-page .quiz-buttons a:hover {
   background: #ffaa00;
   transform: scale(1.1);
+}
+
+.error-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 80vh;
+  padding-top: 40px;
+}
+
+.quiz-start {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    text-align: center;
+}
+
+#startBtn,
+#beginQuizBtn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background: var(--tertiary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.3s ease;
+}
+
+#beginQuizBtn:hover {
+  background: #005bb5;
+}
+
+.hidden {
+    display: none;
+}
+
+#rulesBox {
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  color: white;
+  max-width: 600px;
+  text-align: center;
+  font-size: 1.1rem; /* basisgrootte voor regels */
+  line-height: 1.8;
+}
+
+#rulesBox h2 {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--tertiary-color);
+  margin-bottom: 20px;
+}
+
+#rulesBox p {
+  margin: 8px 0;
 }
