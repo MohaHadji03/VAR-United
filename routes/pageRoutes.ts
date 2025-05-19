@@ -81,6 +81,7 @@ router.get('/blacklist-clubs', (req, res) => {
         res.render('quizpagina', { currentPage: 'quizpagina', title: 'Quiz', user: req.session.user });
     });
 
+    
     router.get('/quiz-player', (req, res) => {
         res.render('player-quiz', { currentPage: 'player-quiz', title: 'Speler Quiz', user: req.session.user });
     });
