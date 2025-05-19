@@ -188,6 +188,18 @@ nav ul li a.active {
   box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
+.loguit {
+  background-color: var(--secondary-color);
+  color: var(--tertiary-color);
+  border: 1px solid black; 
+  border-radius: 6px;
+}
+
+.loguit:hover {
+  color: black;
+  background-color: #dfdfdf;
+}
+
 /*------------------------login---------------------*/
 
 
