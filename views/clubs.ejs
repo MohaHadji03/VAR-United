@@ -5,7 +5,11 @@
         <% clubs.forEach(club => { %>
             <section class="comp__card">
                 <section class="card__icon">
-                    <img src="/clubs/<%= club.id %>/logo" alt="<%= club.name %>" onerror="this.src='/assets/default-club-logo.png';">
+                    <% if (club.imageUrl) { %>
+                        <img src="<%= club.imageUrl %>" alt="<%= club.name %>" onerror="this.src='/assets/default-club-logo.png';">
+                    <% } else { %>
+                        <img src="/assets/default-club-logo.png" alt="<%= club.name %>">
+                    <% } %>
                 </section>
 
                 <section class="comp__card__content">
