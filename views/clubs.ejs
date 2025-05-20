@@ -24,10 +24,28 @@
                         </p>
                     </section>
 
-                    <section class="comp__card__buttons">
-                        <button class="comp__card__button">Blacklist</button>
-                        <button class="comp__card__button secondary">Favoriet</button>
-                    </section>
+                    <% if (user) { %>
+                        <section class="comp__card__buttons">
+                            <form action="/blacklist-club/<%= club.id %>" method="post" style="display: inline;">
+                                <button type="submit" class="comp__card__button">Blacklist</button>
+                            </form>
+                            
+                            <% if (club.isFavorite) { %>
+                                <form action="/unfavorite-club/<%= club.id %>" method="post" style="display: inline;">
+                                    <button type="submit" class="comp__card__button secondary">Verwijder favoriet</button>
+                                </form>
+                            <% } else { %>
+                                <form action="/favorite-club/<%= club.id %>" method="post" style="display: inline;">
+                                    <button type="submit" class="comp__card__button secondary">Favoriet</button>
+                                </form>
+                            <% } %>
+                        </section>
+                    <% } else { %>
+                        <section class="comp__card__buttons">
+                            <button class="comp__card__button" onclick="alert('Log in om deze functie te gebruiken')">Blacklist</button>
+                            <button class="comp__card__button secondary" onclick="alert('Log in om deze functie te gebruiken')">Favoriet</button>
+                        </section>
+                    <% } %>
                 </section>
             </section>
         <% }); %>
