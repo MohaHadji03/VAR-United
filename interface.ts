@@ -17,7 +17,7 @@ export interface Club {
   id: number;
   name: string;
   league: number;
-  image?: string;
+  imageUrl?: string;
 }
 
 export interface League {
