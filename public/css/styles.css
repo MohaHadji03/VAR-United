@@ -29,7 +29,7 @@ body {
 
   margin: 0;
   padding: 0;
-  background-color:  #0075d5;
+  background-color: #0075d5;
   background-image: url(/assets/staduim.jpg);
   background-size: cover;
   background-position: center;
@@ -191,7 +191,7 @@ nav ul li a.active {
 .loguit {
   background-color: var(--secondary-color);
   color: var(--tertiary-color);
-  border: 1px solid black; 
+  border: 1px solid black;
   border-radius: 6px;
 }
 
@@ -1111,6 +1111,36 @@ body.quiz-page {
   backdrop-filter: blur(12px);
 }
 
+.error-box {
+  background: rgba(0, 0, 0, 0.65);
+  padding: 40px 30px;
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+  color: white;
+  text-align: center;
+  max-width: 600px;
+  width: 90%;
+}
+
+.error-buttons a {
+  display: inline-block;
+  margin: 0 10px;
+  padding: 12px 24px;
+  background-color: #ffcc00;
+  color: var(--primary-color);
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+.error-buttons a:hover {
+  background-color: #ffaa00;
+  transform: scale(1.05);
+}
+
+
 .error-page h1 {
   font-size: 2.5em;
   color: #FFD700;
@@ -1182,31 +1212,41 @@ body.quiz-page {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 #rulesBox {
-  background: rgba(0, 0, 0, 0.65);
-  padding: 30px 40px;
-  border-radius: 16px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-  color: white;
-  max-width: 600px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 2rem;
+  border-radius: 20px;
   text-align: center;
-  font-size: 1.1rem;
-  /* basisgrootte voor regels */
-  line-height: 1.8;
+  max-width: 600px;
+  width: 90%;
+  color: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
 
 #rulesBox h2 {
-  font-size: 1.6rem;
-  font-weight: bold;
-  color: var(--tertiary-color);
-  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #00bfff;
+  margin-bottom: 1rem;
 }
 
 #rulesBox p {
-  margin: 8px 0;
+  margin: 0.8rem 0;
+  font-size: 1.1rem;
+}
+
+#startQuizBtn {
+  background-color: #00bfff;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  transition: background-color 0.3s ease;
 }
 
 .quiz-container {

@@ -286,6 +286,10 @@ export function pageRoutes() {
         }
     });
 
+    router.get('/quizpagina', (req, res) => {
+        res.render('quizpagina', { currentPage: 'quizpagina', title: 'Quiz', user: req.session.user });
+    });
+
     router.get('/clubquiz', async (req, res) => {
         const clubs = await clubCollection.find().toArray();
 
@@ -295,6 +299,10 @@ export function pageRoutes() {
             user: req.session.user,
             clubs
         });
+    });
+
+    router.get('/playerquiz', (req, res) => {
+        res.render('404', { currentPage: '404', title: 'Speler Quiz', user: req.session.user });
     });
 
     router.get('/competitiesquiz', (req, res) => {
