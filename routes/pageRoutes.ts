@@ -208,25 +208,29 @@ router.get('/competities', async (req, res) => {
     });
 
     // Blacklist routes
-    router.post('/blacklist-club/:clubId', isAuthenticated, async (req, res) => {
-        try {
-            if (!req.session.user || !req.session.user._id) {
-                throw new Error('User not authenticated');
-            }
-            const { clubId } = req.params;
-            const userId = new ObjectId(req.session.user._id);
+  router.post('/blacklist-club/:clubId', isAuthenticated, async (req, res) => {
+  try {
+    if (!req.session.user || !req.session.user._id) {
+      throw new Error('User not authenticated');
+    }
 
-            const success = await addClubToBlacklist(userId, clubId);
-            
-            // Redirect based on the referrer URL
-            const referer = req.get('Referer') || '/clubs';
-            res.redirect(referer);
-        } catch (error) {
-            console.error('Failed to add to blacklist:', error);
-            res.status(500).send('Error adding to blacklist');
-        }
-        
-    });
+    const { clubId } = req.params;
+    const { reason } = req.body;
+    const userId = new ObjectId(req.session.user._id);
+
+    // Log de reden of sla op in DB als je dat wilt
+    console.log(`Reden voor blacklist: ${reason}`);
+
+    const success = await addClubToBlacklist(userId, clubId);
+
+    const referer = req.get('Referer') || '/clubs';
+    res.redirect(referer);
+  } catch (error) {
+    console.error('Failed to add to blacklist:', error);
+    res.status(500).send('Error adding to blacklist');
+  }
+});
+
 
     router.post('/unblacklist-club/:clubId', isAuthenticated, async (req, res) => {
         try {

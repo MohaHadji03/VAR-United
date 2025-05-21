@@ -27,6 +27,10 @@
                             </p>
                         </section>
 
+                        <% if (club.reason) { %>
+                        <p class="comp__card__description"><strong>Reden voor blacklist:</strong> <%= club.reason %></p>
+                        <% } %>
+
                         <section class="comp__card__buttons">
                             <form action="/unblacklist-club/<%= club.id %>" method="post">
                                 <button type="submit" class="comp__card__button">Verwijder van blacklist</button>
