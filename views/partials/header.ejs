@@ -13,9 +13,14 @@
 <body>
     <header>
         <a href="home"><img src="assets/logoCropped.png" alt="logo"></a>
-        <nav></nav>
         <div class="right-section">
-            <img class="user-icon" src="assets/nouserselected.png" alt="user-icon">
-  <p><%= user.username %> <form method="POST" action="/logout" style="display:inline;"><button type="submit" class="loguit">Log uit</button></form></p>
-        </div>
+  <div class="user-info">
+    <img class="user-icon" src="assets/nouserselected.png" alt="user-icon">
+    <p><%= user.username %></p>
+  </div>
+  <form method="POST" action="/logout">
+    <button type="submit" class="loguit">Log uit</button>
+  </form>
+</div>
+
     </header>

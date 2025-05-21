@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import { ObjectId } from "mongodb";
 import { isAuthenticated } from "../middleware/secureMiddleware";
-import { connect, leagueCollection, clubCollection} from '../database';
+import { connect, leagueCollection, clubCollection } from '../database';
 import { title } from "process";
 import { homedir } from "os";
 import { render } from "ejs";
@@ -146,7 +146,7 @@ router.get('/competities', async (req, res) => {
             const userId = new ObjectId(userIdString);
             const blacklistedClubs = await getBlacklistedClubs(userId);
 
-            // Get league names for each blacklisted club
+        
             const leagues = await leagueCollection
                 .find<League>({}, { projection: { _id: 0, id: 1, name: 1 } })
                 .toArray();
@@ -225,6 +225,7 @@ router.get('/competities', async (req, res) => {
             console.error('Failed to add to blacklist:', error);
             res.status(500).send('Error adding to blacklist');
         }
+        
     });
 
     router.post('/unblacklist-club/:clubId', isAuthenticated, async (req, res) => {
@@ -283,6 +284,29 @@ router.get('/competities', async (req, res) => {
             console.error('Failed to remove from favorites:', error);
             res.status(500).send('Error removing from favorites');
         }
+    });
+
+    router.get('/quizpagina', (req, res) => {
+        res.render('quizpagina', { currentPage: 'quizpagina', title: 'Quiz', user: req.session.user });
+    });
+
+    router.get('/clubquiz', async (req, res) => {
+        const clubs = await clubCollection.find().toArray();
+
+        res.render('clubs-quiz', {
+            currentPage: 'club-quiz',
+            title: 'Club Quiz',
+            user: req.session.user,
+            clubs
+        });
+    });
+
+    router.get('/playerquiz', (req, res) => {
+        res.render('404', { currentPage: '404', title: 'Speler Quiz', user: req.session.user });
+    });
+
+    router.get('/competitiesquiz', (req, res) => {
+        res.render('competities-quiz', { currentPage: 'competities-quiz', title: 'Speler Quiz', user: req.session.user });
     });
 
     return router;
