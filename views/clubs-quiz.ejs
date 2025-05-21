@@ -1,20 +1,78 @@
 <%- include('partials/header') %>
 
-<main class="quiz-start">
-    <section id="rulesBox">
-        <h2>Spelregels</h2>
-        <ul>
-            <li>Je hebt 10 seconden per vraag.</li>
-            <li>Na een keuze kan je die niet meer aanpassen.</li>
-            <li>Elke juiste vraag levert punten op.</li>
-            <li>Geen straf voor foute antwoorden.</li>
+<main class="quiz-wrapper">
+  <div class="quiz-container">
+    <section class="quiz-question">
+        <img src="/assets/placeholder.png" alt="Club Logo" id="clubImage">
+        <h2 id="quizQuestion">Welke club is dit?</h2>
+        
+        <ul id="quizOptions">
+            <!-- options komen via script -->
         </ul>
-        <button id="beginQuizBtn">Begin Quiz</button>
+        <button id="nextBtn">Volgende</button>
     </section>
+  </div>
 </main>
 
+
 <script>
-    document.getElementById("beginQuizBtn").addEventListener("click", () => {
-        window.location.href = "/quizvragen"; // verander dit naar je quizroute
-    });
+    const clubs = <%- JSON.stringify(clubs) %>;
+
+    let usedIndexes = [];
+    let score = 0;
+
+    function getRandomClubIndex() {
+        let idx;
+        do {
+            idx = Math.floor(Math.random() * clubs.length);
+        } while (usedIndexes.includes(idx));
+        usedIndexes.push(idx);
+        return idx;
+    }
+
+    function generateQuestion() {
+        const correctIndex = getRandomClubIndex();
+        const correctClub = clubs[correctIndex];
+
+        document.getElementById("clubImage").src = "/assets/placeholder.png"; // TODO: vervang door echte foto
+
+        const options = [correctClub.name];
+
+        while (options.length < 4) {
+            const rand = clubs[Math.floor(Math.random() * clubs.length)];
+            if (!options.includes(rand.name)) {
+                options.push(rand.name);
+            }
+        }
+
+        // Shuffle
+        options.sort(() => Math.random() - 0.5);
+
+        const ul = document.getElementById("quizOptions");
+        ul.innerHTML = '';
+
+        options.forEach(option => {
+            const li = document.createElement("li");
+            li.textContent = option;
+            li.addEventListener("click", () => {
+                if (option === correctClub.name) {
+                    li.style.backgroundColor = 'green';
+                    score++;
+                } else {
+                    li.style.backgroundColor = 'red';
+                }
+                document.getElementById("nextBtn").disabled = false;
+            });
+            ul.appendChild(li);
+        });
+
+        document.getElementById("nextBtn").disabled = true;
+    }
+
+    document.getElementById("nextBtn").addEventListener("click", generateQuestion);
+
+    // Eerste vraag laden
+    generateQuestion();
 </script>
+
+<%- include('partials/footer') %>

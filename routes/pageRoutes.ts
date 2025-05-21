@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import { ObjectId } from "mongodb";
 import { isAuthenticated } from "../middleware/secureMiddleware";
-import { connect, leagueCollection, clubCollection} from '../database';
+import { connect, leagueCollection, clubCollection } from '../database';
 import { title } from "process";
 import { homedir } from "os";
 import { render } from "ejs";
@@ -41,51 +41,51 @@ export function pageRoutes() {
         res.render('aboutus', { currentPage: 'aboutus', title: 'Over ons', user: req.session.user });
     });
 
-    router.get('/clubs', async(req, res) => {
-         try {
-    const [clubs, leagues] = await Promise.all([
-      clubCollection.find<Club>({}).limit(50).toArray(),
-      leagueCollection
-        .find<League>({}, { projection: { _id: 0, id: 1, name: 1 } })
-        .toArray()
-    ]);
+    router.get('/clubs', async (req, res) => {
+        try {
+            const [clubs, leagues] = await Promise.all([
+                clubCollection.find<Club>({}).limit(50).toArray(),
+                leagueCollection
+                    .find<League>({}, { projection: { _id: 0, id: 1, name: 1 } })
+                    .toArray()
+            ]);
 
-    // maak een map: leagueId → leagueName
-    const leagueMap = new Map(leagues.map(l => [l.id, l.name]));
+            // maak een map: leagueId → leagueName
+            const leagueMap = new Map(leagues.map(l => [l.id, l.name]));
 
-    // voeg leagueName‑veld toe aan elke club
-    const clubsWithLeague = clubs.map(c => ({
-      ...c,
-      leagueName: leagueMap.get(c.league) || null
-    }));
+            // voeg leagueName‑veld toe aan elke club
+            const clubsWithLeague = clubs.map(c => ({
+                ...c,
+                leagueName: leagueMap.get(c.league) || null
+            }));
 
-    res.render('clubs', {
-      title: 'Clubs',
-      currentPage: 'clubs',
-      clubs: clubsWithLeague,
-      user: req.session.user
-    });
-  } catch (err) {
-    console.error('❌ Error fetching players:', err);;
-  }
+            res.render('clubs', {
+                title: 'Clubs',
+                currentPage: 'clubs',
+                clubs: clubsWithLeague,
+                user: req.session.user
+            });
+        } catch (err) {
+            console.error('❌ Error fetching players:', err);;
+        }
     });
 
     router.get('/competities', async (req, res) => {
-         try {
-    
-    const leagues = await leagueCollection
-      .find({}, { projection: { _id: 0, name: 1, id: 1 } })
-      .toArray();
+        try {
 
-    res.render("competities", {
-      currentPage: "competities",
-      title: "Competities",
-      user: req.session.user,
-      leagues,                      
-    });
-  } catch (err) {
-    console.error('❌ Error fetching players:', err);;
-  }
+            const leagues = await leagueCollection
+                .find({}, { projection: { _id: 0, name: 1, id: 1 } })
+                .toArray();
+
+            res.render("competities", {
+                currentPage: "competities",
+                title: "Competities",
+                user: req.session.user,
+                leagues,
+            });
+        } catch (err) {
+            console.error('❌ Error fetching players:', err);;
+        }
     });
 
     router.get('/teams', (req, res) => {
@@ -124,8 +124,23 @@ export function pageRoutes() {
         res.render('quizpagina', { currentPage: 'quizpagina', title: 'Quiz', user: req.session.user });
     });
 
-    router.get('/quiz-player', (req, res) => {
+    router.get('/playerquiz', (req, res) => {
         res.render('player-quiz', { currentPage: 'player-quiz', title: 'Speler Quiz', user: req.session.user });
+    });
+
+    router.get('/clubquiz', async (req, res) => {
+        const clubs = await clubCollection.find().toArray();
+
+        res.render('clubs-quiz', {
+            currentPage: 'club-quiz',
+            title: 'Club Quiz',
+            user: req.session.user,
+            clubs
+        });
+    });
+
+    router.get('/competitiesquiz', (req, res) => {
+        res.render('competities-quiz', { currentPage: 'competities-quiz', title: 'Speler Quiz', user: req.session.user });
     });
 
     return router;
