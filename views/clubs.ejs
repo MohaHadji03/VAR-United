@@ -28,6 +28,56 @@
             </section>
         <% }); %>
     </section>
+
+    <div class="pagination-controls" style="text-align:center; margin: 1em 0;">
+  <button id="prev-btn">Vorige</button>
+  <span id="page-number">Pagina 1 van ...</span>
+  <button id="next-btn">Volgende</button>
+</div>
+
 </main>
+
+
+<script>
+  // Selecteer alle club cards
+  const cards = document.querySelectorAll('.comp__card');
+  const cardsPerPage = 9;
+  let currentPage = 1;
+  const totalPages = Math.ceil(cards.length / cardsPerPage);
+
+  function showPage(page) {
+    // Zorg dat pagina binnen bereik is
+    if(page < 1) page = 1;
+    if(page > totalPages) page = totalPages;
+    currentPage = page;
+
+    // Verberg alle kaarten eerst
+    cards.forEach(card => card.style.display = 'none');
+
+    // Toon kaarten voor de huidige pagina
+    const start = (page - 1) * cardsPerPage;
+    const end = start + cardsPerPage;
+    for(let i = start; i < end && i < cards.length; i++) {
+      cards[i].style.display = 'block';
+    }
+
+    // Update paginatie knoppen tekst/status
+    document.getElementById('page-number').textContent = `Pagina ${currentPage} van ${totalPages}`;
+    document.getElementById('prev-btn').disabled = currentPage === 1;
+    document.getElementById('next-btn').disabled = currentPage === totalPages;
+  }
+
+  // Event listeners voor knoppen
+  document.getElementById('prev-btn').addEventListener('click', () => {
+    showPage(currentPage - 1);
+  });
+  document.getElementById('next-btn').addEventListener('click', () => {
+    showPage(currentPage + 1);
+  });
+
+  // Init pagina
+  showPage(1);
+</script>
+
 
 <%- include('partials/footer') %>
