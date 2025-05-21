@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import { ObjectId } from "mongodb";
 import { isAuthenticated } from "../middleware/secureMiddleware";
-import { connect, leagueCollection, clubCollection} from '../database';
+import { connect, leagueCollection, clubCollection } from '../database';
 import { title } from "process";
 import { homedir } from "os";
 import { render } from "ejs";
@@ -284,6 +284,29 @@ export function pageRoutes() {
             console.error('Failed to remove from favorites:', error);
             res.status(500).send('Error removing from favorites');
         }
+    });
+
+    router.get('/quizpagina', (req, res) => {
+        res.render('quizpagina', { currentPage: 'quizpagina', title: 'Quiz', user: req.session.user });
+    });
+
+    router.get('/clubquiz', async (req, res) => {
+        const clubs = await clubCollection.find().toArray();
+
+        res.render('clubs-quiz', {
+            currentPage: 'club-quiz',
+            title: 'Club Quiz',
+            user: req.session.user,
+            clubs
+        });
+    });
+
+    router.get('/playerquiz', (req, res) => {
+        res.render('404', { currentPage: '404', title: 'Speler Quiz', user: req.session.user });
+    });
+
+    router.get('/competitiesquiz', (req, res) => {
+        res.render('competities-quiz', { currentPage: 'competities-quiz', title: 'Speler Quiz', user: req.session.user });
     });
 
     return router;

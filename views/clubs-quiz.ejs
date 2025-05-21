@@ -1,20 +1,100 @@
 <%- include('partials/header') %>
 
 <main class="quiz-start">
-    <section id="rulesBox">
-        <h2>Spelregels</h2>
-        <ul>
-            <li>Je hebt 10 seconden per vraag.</li>
-            <li>Na een keuze kan je die niet meer aanpassen.</li>
-            <li>Elke juiste vraag levert punten op.</li>
-            <li>Geen straf voor foute antwoorden.</li>
+  <div id="rulesBox">
+    <h2>Spelregels</h2>
+    <p>Je krijgt telkens een clublogo te zien.</p>
+    <p>Kies uit vier opties welke club het is.</p>
+    <p>Bij het juiste antwoord krijg je een punt.</p>
+    <p>Je kan niet opnieuw klikken na een keuze.</p>
+    <button id="startQuizBtn">Start de quiz</button>
+  </div>
+
+  <div class="quiz-container hidden">
+    <section class="quiz-question">
+        <img src="/assets/placeholder.png" alt="Club Logo" id="clubImage" onerror="this.src='/assets/placeholder.png'">
+        <h2 id="quizQuestion">Welke club is dit?</h2>
+        <ul id="quizOptions">
+            <!-- options komen via script -->
         </ul>
-        <button id="beginQuizBtn">Begin Quiz</button>
+        <button id="nextBtn">Volgende</button>
     </section>
+  </div>
 </main>
 
 <script>
-    document.getElementById("beginQuizBtn").addEventListener("click", () => {
-        window.location.href = "/quizvragen"; // verander dit naar je quizroute
+    const allClubs = <%- JSON.stringify(clubs) %>;
+    const clubs = allClubs.filter(club => typeof club.imageUrl === "string" && club.imageUrl.trim() !== "");
+
+    let usedIndexes = [];
+    let score = 0;
+
+    function getRandomClubIndex() {
+        let idx;
+        if (usedIndexes.length >= clubs.length) return -1;
+        do {
+            idx = Math.floor(Math.random() * clubs.length);
+        } while (usedIndexes.includes(idx));
+        usedIndexes.push(idx);
+        return idx;
+    }
+
+    function generateQuestion() {
+        const correctIndex = getRandomClubIndex();
+        if (correctIndex === -1) {
+            alert("Je hebt alle clubs gehad!");
+            return;
+        }
+
+        const correctClub = clubs[correctIndex];
+        document.getElementById("clubImage").src = correctClub.imageUrl || "/assets/placeholder.png";
+
+        const options = [correctClub.name];
+        while (options.length < 4) {
+            const rand = clubs[Math.floor(Math.random() * clubs.length)];
+            if (!options.includes(rand.name)) {
+                options.push(rand.name);
+            }
+        }
+
+        options.sort(() => Math.random() - 0.5);
+
+        const ul = document.getElementById("quizOptions");
+        ul.innerHTML = '';
+
+        options.forEach(option => {
+            const li = document.createElement("li");
+            li.textContent = option;
+            li.addEventListener("click", () => {
+                if (li.classList.contains("clicked")) return;
+                [...ul.children].forEach(el => el.classList.add("clicked"));
+
+                if (option === correctClub.name) {
+                    li.style.backgroundColor = 'green';
+                    score++;
+                } else {
+                    li.style.backgroundColor = 'red';
+                }
+                document.getElementById("nextBtn").disabled = false;
+            });
+            ul.appendChild(li);
+        });
+
+        document.getElementById("nextBtn").disabled = true;
+    }
+
+    document.getElementById("nextBtn").addEventListener("click", generateQuestion);
+
+    document.getElementById("startQuizBtn").addEventListener("click", () => {
+        if (clubs.length === 0) {
+            alert("Er zijn geen clubs met een logo beschikbaar.");
+            return;
+        }
+
+        document.getElementById("rulesBox").classList.add("hidden");
+        document.querySelector(".quiz-container").classList.remove("hidden");
+        generateQuestion();
     });
 </script>
+
+<%- include('partials/footer') %>
