@@ -17,12 +17,14 @@ export interface Club {
   id: number;
   name: string;
   league: number;
+  imageUrl?: string;
 }
 
 export interface League {
   id: number;
   name: string;
   nationId: number;
+  image?: string;
 }
 
 export interface Nations {

@@ -58,6 +58,12 @@ export function loginRouter() {
         }
     });
 
+    router.post("/logout", isAuthenticated, async (req, res) => {
+    req.session.destroy((err) => {
+        res.redirect("/");
+    });
+});
+
     return router;
 
 }

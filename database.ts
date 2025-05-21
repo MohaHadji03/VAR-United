@@ -3,6 +3,9 @@ import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import { Club, League, Player, UserModel } from './interface'; // your future user model interface
 
+import fs from 'fs';
+import path from 'path';
+
 dotenv.config();
 
 const MONGODB_URI = process.env.MONGO_URI!;
@@ -165,6 +168,91 @@ export async function register(username: string, email: string, password: string
     return;
 }
 
+export async function syncLocalClubImages() {
+  try {
+    console.log("🖼️ Automatisch synchroniseren van lokale clublogo's gestart");
+    
+    // Pad waar de logo's zijn opgeslagen
+    const clubLogoPath = path.join(process.cwd(), 'public', 'assets', 'clubs');
+    
+    // Controleer of de map bestaat
+    if (!fs.existsSync(clubLogoPath)) {
+      console.error(`❌ Map niet gevonden: ${clubLogoPath}`);
+      return;
+    }
+    
+    // Haal alle bestandsnamen op uit de map
+    const logoFiles = fs.readdirSync(clubLogoPath)
+      .filter(file => file.endsWith('.png')); // Alleen PNG-bestanden
+    
+    console.log(`🔍 ${logoFiles.length} logo-bestanden gevonden`);
+    
+    let updatedCount = 0;
+    let notFoundCount = 0;
+    
+    // Loop door elk bestand en update de bijbehorende club
+    for (const logoFile of logoFiles) {
+      // Verwijder de extensie (.png) van de bestandsnaam om de clubnaam te krijgen
+      const clubName = logoFile.replace('.png', '');
+      
+      // De URL voor front-end gebruik
+      const imageUrl = `/assets/clubs/${logoFile}`;
+      
+      // Start met een exacte overeenkomst
+      let result = await clubCollection.updateOne(
+        { name: clubName },
+        { $set: { imageUrl: imageUrl } }
+      );
+      
+      // Als geen exacte match, probeer case-insensitive match
+      if (result.matchedCount === 0) {
+        result = await clubCollection.updateOne(
+          { name: { $regex: new RegExp(`^${clubName}$`, 'i') } },
+          { $set: { imageUrl: imageUrl } }
+        );
+      }
+      
+      // Als nog steeds geen match, probeer een meer flexibele match
+      if (result.matchedCount === 0) {
+        // Maak een flexibele regex die woorden zoekt in willekeurige volgorde
+        const words = clubName
+          .split(/[^a-zA-Z0-9]+/) // Split op niet-alfanumerieke tekens
+          .filter(word => word.length > 2) // Filter korte woorden (zoals 'FC', 'AC', etc.)
+          .map(word => `(?=.*${word})`) // Maak lookahead assertions voor elk woord
+          .join('');
+        
+        if (words.length > 0) {
+          const flexibleRegex = new RegExp(words, 'i');
+          
+          result = await clubCollection.updateOne(
+            { name: { $regex: flexibleRegex } },
+            { $set: { imageUrl: imageUrl } }
+          );
+        }
+      }
+      
+      if (result.matchedCount > 0) {
+        updatedCount++;
+        console.log(`✅ Match gevonden voor "${clubName}"`);
+      } else {
+        notFoundCount++;
+        console.log(`⚠️ Geen overeenkomende club gevonden voor: "${clubName}"`);
+      }
+    }
+    
+    console.log(`🔄 Synchronisatie voltooid: ${updatedCount} logo's bijgewerkt, ${notFoundCount} zonder match`);
+    
+    // Als er clubs zijn zonder logo, geef dit aan
+    const unassignedCount = await clubCollection.countDocuments({ imageUrl: { $exists: false } });
+    if (unassignedCount > 0) {
+      console.log(`ℹ️ ${unassignedCount} clubs hebben nog geen logo toegewezen gekregen`);
+    }
+    
+  } catch (error) {
+    console.error('❌ Fout bij synchroniseren van clublogo\'s:', error);
+  }
+}
+
 export async function wipeDatabase() {
     try {
         await clubCollection.deleteMany({});
@@ -178,19 +266,23 @@ export async function wipeDatabase() {
 }
 
 export async function connect() {
-    try {
-        await client.connect();
-        console.log('Connected to MongoDB');
-        //await wipeDatabase();
-        await loadClubData();
-        await loadLeagueData();
-        await loadPlayerData();
-        process.on('SIGINT', async () => {
-            await client.close();
-            console.log('Disconnected from MongoDB');
-            process.exit(0);
-        });
-    } catch (error) {
-        console.error('Failed to connect to MongoDB', error);
-    }
+  try {
+    await client.connect();
+    console.log('Connected to MongoDB');
+    //await wipeDatabase();
+    await loadClubData();
+    await loadLeagueData();
+    await loadPlayerData();
+    
+    // Voeg hier de aanroep van de synchronisatiefunctie toe
+    await syncLocalClubImages();
+    
+    process.on('SIGINT', async () => {
+      await client.close();
+      console.log('Disconnected from MongoDB');
+      process.exit(0);
+    });
+  } catch (error) {
+    console.error('Failed to connect to MongoDB', error);
+  }
 }
