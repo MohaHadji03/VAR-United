@@ -147,7 +147,7 @@ export function pageRoutes() {
             const userId = new ObjectId(userIdString);
             const blacklistedClubs = await getBlacklistedClubs(userId);
 
-            // Get league names for each blacklisted club
+        
             const leagues = await leagueCollection
                 .find<League>({}, { projection: { _id: 0, id: 1, name: 1 } })
                 .toArray();
@@ -226,6 +226,7 @@ export function pageRoutes() {
             console.error('Failed to add to blacklist:', error);
             res.status(500).send('Error adding to blacklist');
         }
+        
     });
 
     router.post('/unblacklist-club/:clubId', isAuthenticated, async (req, res) => {
