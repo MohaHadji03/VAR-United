@@ -1,7 +1,7 @@
 import { MongoClient, Collection } from 'mongodb';
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
-import { Club, League, Player, UserModel } from './interface'; // your future user model interface
+import { Club, League, Player, UserModel } from './interface';
 
 import fs from 'fs';
 import path from 'path';
@@ -253,6 +253,104 @@ export async function syncLocalClubImages() {
   }
 }
 
+export async function syncLocalLeagueImages() {
+  try {
+    console.log("🖼️ Automatisch synchroniseren van lokale league-logo's gestart");
+
+    // Pad waar de logo's zijn opgeslagen
+    const leagueLogoPath = path.join(process.cwd(), 'public', 'assets', 'leagues');
+
+    // Controleer of de map bestaat
+    if (!fs.existsSync(leagueLogoPath)) {
+      console.error(`❌ Map niet gevonden: ${leagueLogoPath}`);
+      return;
+    }
+
+    // Haal alle PNG-bestanden op
+    const logoFiles = fs.readdirSync(leagueLogoPath).filter(file => file.endsWith('.png'));
+
+    console.log(`🔍 ${logoFiles.length} logo-bestanden gevonden`);
+
+    let updatedCount = 0;
+    let notFoundCount = 0;
+
+    for (const logoFile of logoFiles) {
+      const leagueName = logoFile.replace('.png', '');
+      const imageUrl = `/assets/leagues/${logoFile}`;
+
+      // 1. Exacte match
+      let result = await leagueCollection.updateOne(
+        { name: leagueName },
+        { $set: { imageUrl } }
+      );
+
+      // 2. Case-insensitive match
+      if (result.matchedCount === 0) {
+        result = await leagueCollection.updateOne(
+          { name: { $regex: new RegExp(`^${leagueName}$`, 'i') } },
+          { $set: { imageUrl } }
+        );
+      }
+
+      // 3. Flexibele regex (woorden in willekeurige volgorde)
+      if (result.matchedCount === 0) {
+        const words = leagueName
+          .split(/[^a-zA-Z0-9]+/)
+          .filter(word => word.length > 2)
+          .map(word => `(?=.*${word})`)
+          .join('');
+
+        if (words.length > 0) {
+          const flexibleRegex = new RegExp(words, 'i');
+          result = await leagueCollection.updateOne(
+            { name: { $regex: flexibleRegex } },
+            { $set: { imageUrl } }
+          );
+        }
+      }
+
+      if (result.matchedCount > 0) {
+        updatedCount++;
+        console.log(`✅ Match gevonden voor "${leagueName}"`);
+      } else {
+        notFoundCount++;
+        console.warn(`⚠️ Geen match gevonden voor "${leagueName}"`);
+      }
+    }
+
+    console.log(`🔄 Synchronisatie voltooid: ${updatedCount} logo's bijgewerkt, ${notFoundCount} geen match`);
+
+    // Controleer of er nog leagues zonder logo zijn
+    const unassignedCount = await leagueCollection.countDocuments({ imageUrl: { $exists: false } });
+    if (unassignedCount > 0) {
+      console.log(`ℹ️ ${unassignedCount} leagues hebben nog geen logo toegewezen gekregen`);
+    }
+
+  } catch (error) {
+    console.error('❌ Fout bij synchroniseren van league-logo\'s:', error);
+  }
+}
+
+//Logo's verwijderen uit database
+export async function clearAllImages() {
+  try {
+    const leagueResult = await leagueCollection.updateMany(
+      { imageUrl: { $exists: true } },
+      { $unset: { imageUrl: "" } }
+    );
+
+    const clubResult = await clubCollection.updateMany(
+      { imageUrl: { $exists: true } },
+      { $unset: { imageUrl: "" } }
+    );
+
+    console.log(`🧹 Verwijderd uit leagues: ${leagueResult.modifiedCount}`);
+    console.log(`🧹 Verwijderd uit clubs: ${clubResult.modifiedCount}`);
+  } catch (error) {
+    console.error("❌ Fout bij verwijderen van afbeeldingen:", error);
+  }
+}
+
 export async function wipeDatabase() {
     try {
         await clubCollection.deleteMany({});
@@ -270,12 +368,14 @@ export async function connect() {
     await client.connect();
     console.log('Connected to MongoDB');
     //await wipeDatabase();
+    //await clearAllImages();
     await loadClubData();
     await loadLeagueData();
     await loadPlayerData();
     
     // Voeg hier de aanroep van de synchronisatiefunctie toe
     await syncLocalClubImages();
+    await syncLocalLeagueImages();
     
     process.on('SIGINT', async () => {
       await client.close();

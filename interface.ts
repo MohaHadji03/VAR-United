@@ -24,7 +24,7 @@ export interface League {
   id: number;
   name: string;
   nationId: number;
-  image?: string;
+  imageUrl?: string;
 }
 
 export interface Nations {

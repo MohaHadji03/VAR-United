@@ -102,23 +102,22 @@ export function pageRoutes() {
         }
     });
 
-    router.get('/competities', async (req, res) => {
-        try {
-            const leagues = await leagueCollection
-                .find({}, { projection: { _id: 0, name: 1, id: 1 } })
-                .toArray();
-
-            res.render("competities", {
-                currentPage: "competities",
-                title: "Competities",
-                user: req.session.user,
-                leagues,                      
-            });
-        } catch (err) {
-            console.error('❌ Error fetching leagues:', err);
-            res.status(500).send('Internal Server Error');
-        }
-    });
+router.get('/competities', async (req, res) => {
+    try {
+        const leagues = await leagueCollection
+            .find({}, { projection: { _id: 0, name: 1, id: 1, imageUrl: 1 } })
+            .toArray();
+        res.render("competities", {
+            currentPage: "competities",
+            title: "Competities",
+            user: req.session.user,
+            leagues,                      
+        });
+    } catch (err) {
+        console.error('❌ Error fetching leagues:', err);
+        res.status(500).send('Internal Server Error');
+    }
+});
 
     router.get('/teams', (req, res) => {
         res.render('teams', { currentPage: 'teams', title: 'Teams', user: req.session.user });

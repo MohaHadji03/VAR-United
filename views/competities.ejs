@@ -1,70 +1,92 @@
 <%- include('partials/header') %>
+
 <main>
   <section class="comp__container">
     <% leagues.forEach(lg => { %>
       <section class="comp__card">
         <section class="card__icon">
-     
+          <% if (lg.imageUrl) { %>
+            <img src="<%= lg.imageUrl %>" alt="<%= lg.name %>" onerror="this.src='/assets/default-league-logo.png';">
+          <% } else { %>
+            <img src="/assets/default-league-logo.png" alt="<%= lg.name %>">
+          <% } %>
         </section>
 
- <section class="comp__card__content">
+        <section class="comp__card__content">
           <section class="comp__card__text">
             <p class="comp__card__title"><%= lg.name %></p>
             <p class="comp__card__description">
-         
+              <% if (lg.description) { %>
+                <%= lg.description %>
+              <% } else { %>
+                Geen beschrijving beschikbaar.
+              <% } %>
             </p>
           </section>
 
-          <section class="comp__card__buttons">
-            <button class="comp__card__button">Blacklist</button>
-            <button class="comp__card__button secondary">Favoriet</button>
-          </section>
+          <% if (user) { %>
+            <section class="comp__card__buttons">
+              <form action="/blacklist-league/<%= lg.id %>" method="post" style="display: inline;">
+                <button type="submit" class="comp__card__button">Blacklist</button>
+              </form>
+
+              <% if (lg.isFavorite) { %>
+                <form action="/unfavorite-league/<%= lg.id %>" method="post" style="display: inline;">
+                  <button type="submit" class="comp__card__button secondary">Verwijder favoriet</button>
+                </form>
+              <% } else { %>
+                <form action="/favorite-league/<%= lg.id %>" method="post" style="display: inline;">
+                  <button type="submit" class="comp__card__button secondary">Favoriet</button>
+                </form>
+              <% } %>
+            </section>
+          <% } else { %>
+            <section class="comp__card__buttons">
+              <button class="comp__card__button" onclick="alert('Log in om deze functie te gebruiken')">Blacklist</button>
+              <button class="comp__card__button secondary" onclick="alert('Log in om deze functie te gebruiken')">Favoriet</button>
+            </section>
+          <% } %>
         </section>
       </section>
     <% }) %>
   </section>
 
   <div class="pagination-controls-leagues" style="text-align:center; margin: 1em 0;">
-  <button id="prev-btn-leagues">Vorige</button>
-  <span id="page-number-leagues">Pagina 1 van ...</span>
-  <button id="next-btn-leagues">Volgende</button>
-</div>
-
+    <button id="prev-btn-leagues">Vorige</button>
+    <span id="page-number-leagues">Pagina 1 van ...</span>
+    <button id="next-btn-leagues">Volgende</button>
+  </div>
 </main>
 
-    <%- include("partials/footer") %>
+<%- include("partials/footer") %>
+
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      
-        const currentPage = window.location.pathname.split("/").pop();
-
-       
-        const navLinks = document.querySelectorAll("nav ul li a");
-
-        navLinks.forEach(link => {
-            if (link.getAttribute("href") === currentPage) {
-                link.classList.add("active"); 
-            }
-        });
+  // Highlight actieve pagina in navigatie
+  document.addEventListener("DOMContentLoaded", function () {
+    const currentPage = window.location.pathname.split("/").pop();
+    const navLinks = document.querySelectorAll("nav ul li a");
+    navLinks.forEach(link => {
+      if (link.getAttribute("href") === currentPage) {
+        link.classList.add("active");
+      }
     });
-</script>
-<script>
+  });
+
   // Pagination voor competities
-  const leagueCards = document.querySelectorAll('.comp__container section.comp__card');
+  const leagueCards = document.querySelectorAll('.comp__container .comp__card');
   const leaguesPerPage = 9;
   let currentLeaguePage = 1;
   const totalLeaguePages = Math.ceil(leagueCards.length / leaguesPerPage);
 
   function showLeaguePage(page) {
-    if(page < 1) page = 1;
-    if(page > totalLeaguePages) page = totalLeaguePages;
+    if (page < 1) page = 1;
+    if (page > totalLeaguePages) page = totalLeaguePages;
     currentLeaguePage = page;
 
     leagueCards.forEach(card => card.style.display = 'none');
-
     const start = (page - 1) * leaguesPerPage;
     const end = start + leaguesPerPage;
-    for(let i = start; i < end && i < leagueCards.length; i++) {
+    for (let i = start; i < end && i < leagueCards.length; i++) {
       leagueCards[i].style.display = 'block';
     }
 
@@ -80,11 +102,6 @@
     showLeaguePage(currentLeaguePage + 1);
   });
 
-  // Init league pagination
+  // Init
   showLeaguePage(1);
 </script>
-
-
-</body>
-
-</html>
