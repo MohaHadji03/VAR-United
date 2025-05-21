@@ -471,9 +471,34 @@ nav ul li a.active {
 
 .right-section {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
+  gap: 1rem;
+  margin-right: 1rem;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
+
+.user-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.loguit {
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #007bff;
+}
+
+
 
 .main-container {
   display: flex;
@@ -773,6 +798,7 @@ button {
   gap: 20px;
   flex-wrap: wrap;
   margin-top: 50px;
+
 }
 
 .comp__card {
@@ -849,14 +875,16 @@ button {
   white-space: normal;
   max-height: 190px;
   font-size: 1vw;
+  color: #002571;
 }
 
 .comp__card__button {
   padding: 15px;
   border-radius: 8px;
-  background: #777;
+  background:#002571;
   border: none;
   color: var(--secondary-color);
+ 
 }
 
 .comp__card__buttons {
@@ -864,6 +892,7 @@ button {
   gap: 20px;
   justify-content: center;
   flex-wrap: wrap;
+  
 }
 
 .secondary {
@@ -894,7 +923,7 @@ button {
 }
 
 .pagination-controls button {
-  background-color: #007bff;
+  background-color:#002571;
   color: white;
   border: none;
   padding: 0.5em 1.2em;
@@ -905,7 +934,7 @@ button {
 }
 
 .pagination-controls button:disabled {
-  background-color: #cccccc;
+  background-color:#777;
   cursor: not-allowed;
 }
 
@@ -917,6 +946,36 @@ button {
   font-weight: 600;
   font-size: 1rem;
   color: white;
+}
+
+.pagination-controls-leagues {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5em 0;
+  font-family: Arial, sans-serif;
+  user-select: none;
+}
+
+.pagination-controls-leagues button {
+  background-color:#002571;
+  color: white;
+  border: none;
+  padding: 0.5em 1.2em;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-controls-leagues button:disabled {
+  background-color:#777;
+  cursor: not-allowed;
+}
+
+.pagination-controls-leagues button:hover:not(:disabled) {
+  background-color: #0056b3;
 }
 
 /* quiz */
