@@ -101,5 +101,31 @@
   showPage(1);
 </script>
 
+<script>
+  // ... bestaande paginatiecode
+
+  // Voeg blacklist-confirmatie toe
+  document.querySelectorAll('.blacklist-form').forEach(form => {
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Formulier niet automatisch versturen
+
+      const reason = prompt("Waarom wil je deze club op de blacklist zetten?");
+      if (reason && reason.trim() !== "") {
+        
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'reason';
+        input.value = reason;
+        form.appendChild(input);
+
+        form.submit(); // Formulier alsnog verzenden
+      } else {
+        alert("Je moet een reden opgeven om te blacklisten.");
+      }
+    });
+  });
+</script>
+
+
 
 <%- include('partials/footer') %>
