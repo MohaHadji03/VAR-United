@@ -874,6 +874,43 @@ button {
   }
 }
 
+/* next pagination */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5em 0;
+  font-family: Arial, sans-serif;
+  user-select: none;
+}
+
+.pagination-controls button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5em 1.2em;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-controls button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+#page-number {
+  font-weight: 600;
+  font-size: 1rem;
+  color: white;
+}
+
 /* quiz */
 
 .image-gallerys-quiz {

@@ -23,6 +23,13 @@
       </section>
     <% }) %>
   </section>
+
+  <div class="pagination-controls-leagues" style="text-align:center; margin: 1em 0;">
+  <button id="prev-btn-leagues">Vorige</button>
+  <span id="page-number-leagues">Pagina 1 van ...</span>
+  <button id="next-btn-leagues">Volgende</button>
+</div>
+
 </main>
 
     <%- include("partials/footer") %>
@@ -41,6 +48,42 @@
         });
     });
 </script>
+<script>
+  // Pagination voor competities
+  const leagueCards = document.querySelectorAll('.comp__container section.comp__card');
+  const leaguesPerPage = 9;
+  let currentLeaguePage = 1;
+  const totalLeaguePages = Math.ceil(leagueCards.length / leaguesPerPage);
+
+  function showLeaguePage(page) {
+    if(page < 1) page = 1;
+    if(page > totalLeaguePages) page = totalLeaguePages;
+    currentLeaguePage = page;
+
+    leagueCards.forEach(card => card.style.display = 'none');
+
+    const start = (page - 1) * leaguesPerPage;
+    const end = start + leaguesPerPage;
+    for(let i = start; i < end && i < leagueCards.length; i++) {
+      leagueCards[i].style.display = 'block';
+    }
+
+    document.getElementById('page-number-leagues').textContent = `Pagina ${currentLeaguePage} van ${totalLeaguePages}`;
+    document.getElementById('prev-btn-leagues').disabled = currentLeaguePage === 1;
+    document.getElementById('next-btn-leagues').disabled = currentLeaguePage === totalLeaguePages;
+  }
+
+  document.getElementById('prev-btn-leagues').addEventListener('click', () => {
+    showLeaguePage(currentLeaguePage - 1);
+  });
+  document.getElementById('next-btn-leagues').addEventListener('click', () => {
+    showLeaguePage(currentLeaguePage + 1);
+  });
+
+  // Init league pagination
+  showLeaguePage(1);
+</script>
+
 
 </body>
 
