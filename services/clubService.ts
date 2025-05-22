@@ -1,5 +1,3 @@
-// services/clubService.ts
-
 import { ObjectId } from "mongodb";
 import { connect, client, clubCollection } from '../database';
 
