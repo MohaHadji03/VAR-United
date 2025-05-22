@@ -26,9 +26,15 @@
 
           <% if (user) { %>
             <section class="comp__card__buttons">
-              <form action="/blacklist-league/<%= lg.id %>" method="post" style="display: inline;">
-                <button type="submit" class="comp__card__button">Blacklist</button>
-              </form>
+              <% if (lg.isBlacklisted) { %>
+                <form action="/unblacklist-league/<%= lg.id %>" method="post" style="display: inline;">
+                  <button type="submit" class="comp__card__button">Unblacklist</button>
+                </form>
+              <% } else { %>
+                <form action="/blacklist-league/<%= lg.id %>" method="post" style="display: inline;">
+                  <button type="submit" class="comp__card__button">Blacklist</button>
+                </form>
+              <% } %>
 
               <% if (lg.isFavorite) { %>
                 <form action="/unfavorite-league/<%= lg.id %>" method="post" style="display: inline;">
