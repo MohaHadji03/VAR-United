@@ -5,7 +5,7 @@ import { connect, client, leagueCollection } from '../database';
 interface UserLeaguePreferences {
   userId: ObjectId;
   favoriteLeagues: number[]; // Store league IDs 
-  blacklistedLeagues: number[];
+  blacklistedLeagues: { leagueId: number; reason: string }[] | number[]; // Support both old and new format
 }
 
 // Get or create userLeaguePreferences collection
@@ -15,7 +15,7 @@ const getUserLeaguePreferencesCollection = async () => {
 };
 
 // Add a league to blacklist
-export async function addLeagueToBlacklist(userId: ObjectId, leagueId: string): Promise<boolean> {
+export async function addLeagueToBlacklist(userId: ObjectId, leagueId: string, reason: string = ""): Promise<boolean> {
   try {
     const leagueIdNum = parseInt(leagueId);
     if (isNaN(leagueIdNum)) {
@@ -32,14 +32,42 @@ export async function addLeagueToBlacklist(userId: ObjectId, leagueId: string): 
     
     const userLeaguePreferences = await getUserLeaguePreferencesCollection();
     
-    // Add to blacklist and remove from favorites if present
-    const result = await userLeaguePreferences.updateOne(
+    // Controleer het huidige format van blacklistedLeagues
+    const userPref = await userLeaguePreferences.findOne({ userId });
+    
+    // Als we het oude format gebruiken of nog geen blacklist hebben
+    if (!userPref || !userPref.blacklistedLeagues || 
+        (userPref.blacklistedLeagues.length > 0 && typeof userPref.blacklistedLeagues[0] === 'number')) {
+      
+      // Converteer naar het nieuwe format of maak een nieuwe lijst
+      const newBlacklist = userPref && userPref.blacklistedLeagues 
+        ? (userPref.blacklistedLeagues as number[]).map((id: number) => ({ leagueId: id, reason: "" }))
+        : [];
+      
+      // Update naar het nieuwe format
+      await userLeaguePreferences.updateOne(
+        { userId },
+        { $set: { blacklistedLeagues: newBlacklist } },
+        { upsert: true }
+      );
+    }
+    
+    // Verwijder league uit favorieten als die er in staat
+    await userLeaguePreferences.updateOne(
       { userId },
-      { 
-        $addToSet: { blacklistedLeagues: leagueIdNum },
-        $pull: { favoriteLeagues: leagueIdNum }
-      },
-      { upsert: true }
+      { $pull: { favoriteLeagues: leagueIdNum } }
+    );
+    
+    // Verwijder eerst eventuele bestaande blacklist entry voor deze league
+    await userLeaguePreferences.updateOne(
+      { userId },
+      { $pull: { blacklistedLeagues: { leagueId: leagueIdNum } } }
+    );
+    
+    // Voeg toe aan blacklist met reden
+    await userLeaguePreferences.updateOne(
+      { userId },
+      { $addToSet: { blacklistedLeagues: { leagueId: leagueIdNum, reason: reason } } }
     );
     
     return true;
@@ -58,18 +86,32 @@ export async function removeLeagueFromBlacklist(userId: ObjectId, leagueId: stri
     }
     
     const userLeaguePreferences = await getUserLeaguePreferencesCollection();
+    const userPref = await userLeaguePreferences.findOne({ userId });
     
-    const result = await userLeaguePreferences.updateOne(
-      { userId },
-      { $pull: { blacklistedLeagues: leagueIdNum } }
-    );
+    if (!userPref || !userPref.blacklistedLeagues) {
+      return false;
+    }
     
-    return result.modifiedCount > 0;
+    // Ondersteuning voor beide formaten
+    if (userPref.blacklistedLeagues.length > 0 && typeof userPref.blacklistedLeagues[0] === 'number') {
+      await userLeaguePreferences.updateOne(
+        { userId },
+        { $pull: { blacklistedLeagues: leagueIdNum } }
+      );
+    } else {
+      await userLeaguePreferences.updateOne(
+        { userId },
+        { $pull: { blacklistedLeagues: { leagueId: leagueIdNum } } }
+      );
+    }
+    
+    return true;
   } catch (error) {
     console.error('Error removing leagues from blacklist:', error);
     return false;
   }
 }
+
 // getBlacklistedLeagues
 export async function getBlacklistedLeagues(userId: ObjectId): Promise<any[]> {
   try {
@@ -81,17 +123,40 @@ export async function getBlacklistedLeagues(userId: ObjectId): Promise<any[]> {
       return [];
     }
     
-    // Get full leagues details for all blacklisted league IDs
+    // Handle beide formaten (backward compatibility)
+    let leagueIds: number[] = [];
+    let reasonsMap: Map<number, string> = new Map();
+    
+    if (preferences.blacklistedLeagues.length > 0 && typeof preferences.blacklistedLeagues[0] === 'number') {
+      // Oud format
+      leagueIds = preferences.blacklistedLeagues as number[];
+    } else {
+      // Nieuw format
+      const typedBlacklist = preferences.blacklistedLeagues as { leagueId: number; reason: string }[];
+      leagueIds = typedBlacklist.map(item => item.leagueId);
+      
+      // Bouw een map van leagueId naar reason
+      typedBlacklist.forEach(item => {
+        reasonsMap.set(item.leagueId, item.reason);
+      });
+    }
+    
+    // Haal league details op
     const blacklistedLeagues = await leagueCollection.find({
-      id: { $in: preferences.blacklistedLeagues }
+      id: { $in: leagueIds }
     }).toArray();
     
-    return blacklistedLeagues;
+    // Voeg de reden toe aan elk league object
+    return blacklistedLeagues.map(league => ({
+      ...league,
+      reason: reasonsMap.get(league.id) || ""
+    }));
   } catch (error) {
     console.error('Error getting blacklisted leagues:', error);
     return [];
   }
 }
+
 // addLeagueToFavorites
 export async function addLeagueToFavorites(userId: ObjectId, leagueId: string): Promise<boolean> {
   try {
@@ -108,13 +173,10 @@ export async function addLeagueToFavorites(userId: ObjectId, leagueId: string): 
     
     const userLeaguePreferences = await getUserLeaguePreferencesCollection();
     
-    // Check if the leagues is blacklisted
-    const preferences = await userLeaguePreferences.findOne({
-      userId,
-      blacklistedLeagues: leagueIdNum
-    });
+    // Check if the league is blacklisted
+    const isBlacklisted = await isLeagueBlacklisted(userId, leagueIdNum);
     
-    if (preferences) {
+    if (isBlacklisted) {
       // Can't add to favorites if it's blacklisted
       return false;
     }
@@ -132,6 +194,7 @@ export async function addLeagueToFavorites(userId: ObjectId, leagueId: string): 
     return false;
   }
 }
+
 // removeLeagueFromFavorites
 export async function removeLeagueFromFavorites(userId: ObjectId, leagueId: string): Promise<boolean> {
   try {
@@ -182,12 +245,19 @@ export async function isLeagueBlacklisted(userId: ObjectId, leagueId: number): P
   try {
     const userLeaguePreferences = await getUserLeaguePreferencesCollection();
     
-    const preferences = await userLeaguePreferences.findOne({
-      userId,
-      blacklistedLeagues: leagueId
-    });
+    const preferences = await userLeaguePreferences.findOne({ userId });
     
-    return !!preferences;
+    if (!preferences || !preferences.blacklistedLeagues || preferences.blacklistedLeagues.length === 0) {
+      return false;
+    }
+    
+    // Check beide formaten
+    if (typeof preferences.blacklistedLeagues[0] === 'number') {
+      return (preferences.blacklistedLeagues as number[]).includes(leagueId);
+    } else {
+      return (preferences.blacklistedLeagues as { leagueId: number; reason: string }[])
+        .some(item => item.leagueId === leagueId);
+    }
   } catch (error) {
     console.error('Error checking if league is blacklisted:', error);
     return false;
@@ -199,12 +269,13 @@ export async function isLeagueFavorited(userId: ObjectId, leagueId: number): Pro
   try {
     const userLeaguePreferences = await getUserLeaguePreferencesCollection();
     
-    const preferences = await userLeaguePreferences.findOne({
-      userId,
-      favoriteLeagues: leagueId
-    });
+    const preferences = await userLeaguePreferences.findOne({ userId });
     
-    return !!preferences;
+    if (!preferences || !preferences.favoriteLeagues) {
+      return false;
+    }
+    
+    return preferences.favoriteLeagues.includes(leagueId);
   } catch (error) {
     console.error('Error checking if league is favorited:', error);
     return false;

@@ -1,38 +1,38 @@
 <%- include('partials/header') %>
 
 <main>
-    <h1 class="section-title">Blacklisted Competities</h1>
+    <h1 class="section-title">Blacklisted Clubs</h1>
     
-    <% if (leagues && leagues.length > 0) { %>
+    <% if (clubs && clubs.length > 0) { %>
         <section class="comp__container">
-            <% leagues.forEach(league => { %>
+            <% clubs.forEach(club => { %>
                 <section class="comp__card">
                     <section class="card__icon">
-                        <% if (league.imageUrl) { %>
-                            <img src="<%= league.imageUrl %>" alt="<%= league.name %>" onerror="this.src='/assets/default-league-logo.png';">
+                        <% if (club.imageUrl) { %>
+                            <img src="<%= club.imageUrl %>" alt="<%= club.name %>" onerror="this.src='/assets/default-club-logo.png';">
                         <% } else { %>
-                            <img src="/assets/default-league-logo.png" alt="<%= league.name %>">
+                            <img src="/assets/default-club-logo.png" alt="<%= club.name %>">
                         <% } %>
                     </section>
 
                     <section class="comp__card__content">
                         <section class="comp__card__text">
-                            <p class="comp__card__title"><%= league.name %></p>
+                            <p class="comp__card__title"><%= club.name %></p>
                             <p class="comp__card__description">
-                                <% if (league.description) { %>
-                                    <%= league.description %>
+                                <% if (club.league) { %>
+                                    Speelt in competitie: <%= club.leagueName %>
                                 <% } else { %>
-                                    Geen beschrijving beschikbaar.
+                                    Geen competitie informatie beschikbaar.
                                 <% } %>
                             </p>
                         </section>
 
-                        <% if (league.reason) { %>
-                        <p class="comp__card__description"><strong>Reden voor blacklist:</strong> <%= league.reason %></p>
+                        <% if (club.reason) { %>
+                        <p class="comp__card__description"><strong>Reden voor blacklist:</strong> <%= club.reason %></p>
                         <% } %>
 
                         <section class="comp__card__buttons">
-                            <form action="/unblacklist-league/<%= league.id %>" method="post">
+                            <form action="/unblacklist-club/<%= club.id %>" method="post">
                                 <button type="submit" class="comp__card__button">Verwijder van blacklist</button>
                             </form>
                         </section>
@@ -42,8 +42,8 @@
         </section>
     <% } else { %>
         <div class="empty-state">
-            <p>Je hebt nog geen competities op de blacklist gezet.</p>
-            <a href="/competities" class="btn">Bekijk competities</a>
+            <p>Je hebt nog geen clubs op de blacklist gezet.</p>
+            <a href="/clubs" class="btn">Bekijk clubs</a>
         </div>
     <% } %>
 </main>
