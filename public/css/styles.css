@@ -60,7 +60,7 @@ h2 {
 
 header {
   background: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
-  padding: 1rem 1.5rem;
+  padding: 0.2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -89,7 +89,7 @@ footer {
   background: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
   color: var(--secondary-color);
   text-align: center;
-  padding: 20px 0;
+  padding: 10px;
   margin-top: 50px;
   grid-column: 1 / -1;
 }
@@ -1089,17 +1089,7 @@ button {
 }
 
 body.quiz-page {
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background: linear-gradient(320deg, var(--primary-color) 30%, var(--tertiary-color) 88%);
-  color: var(--secondary-color);
-  margin: 0;
-  position: relative;
-  padding: 10px;
+  overflow: hidden;
 }
 
 .logo {
@@ -1115,12 +1105,10 @@ body.quiz-page {
 }
 
 .quiz-container {
-  background: transparent;
-  padding: 20px;
-  border-radius: 10px;
-  width: 100%;
-  max-width: 500px;
-  text-align: center;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  min-height: auto;
 }
 
 .quiz-question img {
@@ -1293,14 +1281,10 @@ body.quiz-page {
 }
 
 .quiz-start {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 80vh;
-  text-align: center;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
-
 #startBtn,
 #beginQuizBtn {
   padding: 10px 20px;
@@ -1333,6 +1317,10 @@ body.quiz-page {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
 
+#rulesBox, .quiz-question, .quiz-end {
+  margin: 0 auto;
+}
+
 #rulesBox h2 {
   font-size: 2rem;
   color: #00bfff;
@@ -1357,11 +1345,10 @@ body.quiz-page {
 }
 
 .quiz-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 80vh;
-  padding: 2rem;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  min-height: auto;
 }
 
 .quiz-question {
