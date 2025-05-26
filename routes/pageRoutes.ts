@@ -216,7 +216,7 @@ export function pageRoutes() {
         }
     });
 
-    //post route voor blacklist
+    //post route voor blacklistcomp
     router.post('/blacklist-league/:leagueId', isAuthenticated, async (req, res) => {
         try {
             if (!req.session.user || !req.session.user._id) {
@@ -224,9 +224,11 @@ export function pageRoutes() {
             }
 
             const { leagueId } = req.params;
+            const { reason } = req.body;
             const userId = new ObjectId(req.session.user._id);
 
-            const success = await addLeagueToBlacklist(userId, leagueId);
+            // Geef de reden door aan de functie om op te slaan
+            const success = await addLeagueToBlacklist(userId, leagueId, reason);
 
             const referer = req.get('Referer') || '/competities';
             res.redirect(referer);
@@ -254,7 +256,7 @@ export function pageRoutes() {
         }
     });
 
-    //post route voor favo
+    //post route voor favocomp
     router.post('/favorite-league/:leagueId', isAuthenticated, async (req, res) => {
         try {
             if (!req.session.user || !req.session.user._id) {
@@ -340,6 +342,7 @@ export function pageRoutes() {
         }
     });
 
+    //favo club
     router.get('/favoriet-clubs', isAuthenticated, async (req, res) => {
         try {
             const userIdString = req.session.user?._id;
@@ -376,7 +379,7 @@ export function pageRoutes() {
         }
     });
 
-    // Blacklist routes
+    // Blacklist routes club
     router.post('/blacklist-club/:clubId', isAuthenticated, async (req, res) => {
         try {
             if (!req.session.user || !req.session.user._id) {
@@ -387,10 +390,8 @@ export function pageRoutes() {
             const { reason } = req.body;
             const userId = new ObjectId(req.session.user._id);
 
-            // Log de reden of sla op in DB als je dat wilt
-            console.log(`Reden voor blacklist: ${reason}`);
-
-            const success = await addClubToBlacklist(userId, clubId);
+            // Geef de reden door aan de functie om op te slaan
+            const success = await addClubToBlacklist(userId, clubId, reason);
 
             const referer = req.get('Referer') || '/clubs';
             res.redirect(referer);
@@ -420,7 +421,7 @@ export function pageRoutes() {
         }
     });
 
-    // Favorite routes
+    // Favorite routes club
     router.post('/favorite-club/:clubId', isAuthenticated, async (req, res) => {
         try {
             if (!req.session.user || !req.session.user._id) {

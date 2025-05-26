@@ -26,7 +26,7 @@
 
                     <% if (user) { %>
                         <section class="comp__card__buttons">
-                            <!-- ✅ aangepaste blacklist form met reden prompt -->
+                            <!-- Blacklist form met hidden input voor reden -->
                             <form action="/blacklist-club/<%= club.id %>" method="post" class="blacklist-form" style="display: inline;">
                                 <input type="hidden" name="reason">
                                 <button type="submit" class="comp__card__button">Blacklist</button>
@@ -60,7 +60,7 @@
     </div>
 </main>
 
-<!-- ✅ JavaScript voor paginatie + blacklist prompt -->
+<!-- JavaScript voor paginatie en blacklist prompt -->
 <script>
   const cards = document.querySelectorAll('.comp__card');
   const cardsPerPage = 9;
@@ -93,7 +93,7 @@
 
   showPage(1);
 
-  // ✅ Prompt voor reden bij blacklisten
+  // Prompt voor reden bij blacklisten
   document.querySelectorAll('.blacklist-form').forEach(form => {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
