@@ -479,9 +479,26 @@ export function pageRoutes() {
         res.render('404', { currentPage: '404', title: 'Speler Quiz', user: req.session.user });
     });
 
-    router.get('/competitiesquiz', (req, res) => {
-        res.render('competities-quiz', { currentPage: 'competities-quiz', title: 'Speler Quiz', user: req.session.user });
+    router.get('/competitiesquiz', async (req, res) => {
+        try {
+            const leagues = await leagueCollection
+                .find<League>({
+                    imageUrl: { $exists: true, $ne: "" } // Alleen leagues met geldige imageUrl
+                })
+                .toArray();
+
+            res.render('competities-quiz', {
+                currentPage: 'competities-quiz',
+                title: 'Competities Quiz',
+                user: req.session.user,
+                leagues
+            });
+        } catch (error) {
+            console.error("Fout bij ophalen van leagues voor quiz:", error);
+            res.status(500).send("Fout bij laden van quiz");
+        }
     });
+
 
     return router;
 }

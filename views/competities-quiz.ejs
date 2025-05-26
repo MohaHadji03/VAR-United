@@ -1,20 +1,131 @@
-<%- include('partials/header') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/reset.css" />
+  <title><%= title %></title>
+  <link rel="icon" type="" href="/assets/logoCropped.png" />
+</head>
+<body>
+  <a class="logo-quiz" href="home"><img src="assets/logoCropped.png" alt="logo" height="100px"/></a>
 
-<main class="quiz-start">
-    <section id="rulesBox">
-        <h2>Spelregels</h2>
-        <ul>
-            <li>Je hebt 10 seconden per vraag.</li>
-            <li>Na een keuze kan je die niet meer aanpassen.</li>
-            <li>Elke juiste vraag levert punten op.</li>
-            <li>Geen straf voor foute antwoorden.</li>
-        </ul>
-        <button id="beginQuizBtn">Begin Quiz</button>
-    </section>
-</main>
+  <main class="quiz-start">
+    <div id="rulesBox">
+      <h2>Spelregels</h2>
+      <p>Je krijgt telkens een competitie-logo te zien.</p>
+      <p>Kies uit vier opties welke competitie het is.</p>
+      <p>Bij het juiste antwoord krijg je een punt.</p>
+      <p>Je kan niet opnieuw klikken na een keuze.</p>
+      <button id="startQuizBtn">Start de quiz</button>
+    </div>
 
-<script>
-    document.getElementById("beginQuizBtn").addEventListener("click", () => {
-        window.location.href = "/quizvragen"; // verander dit naar je quizroute
+    <div class="quiz-container hidden">
+      <section class="quiz-question">
+        <img src="/assets/placeholder.png" alt="League Logo" id="leagueImage" onerror="this.src='/assets/placeholder.png'"/>
+        <h2 id="quizQuestion">Welke competitie is dit?</h2>
+        <ul id="quizOptions"></ul>
+        <button id="nextBtn">Volgende</button>
+      </section>
+    </div>
+
+    <div class="quiz-end hidden" id="quizEndScreen">
+      <h2>Quiz afgelopen!</h2>
+      <p id="finalScoreText"></p>
+      <div class="quiz-end-buttons">
+        <button onclick="location.reload()">Opnieuw spelen</button>
+        <button onclick="window.location.href='/quizpagina'">Andere quiz</button>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const allLeagues = <%- JSON.stringify(leagues) %>; // let op: 'leagues' ipv 'clubs'
+    const leagues = allLeagues.filter(l => typeof l.imageUrl === "string" && l.imageUrl.trim() !== "");
+
+    let usedIndexes = [];
+    let score = 0;
+    let questionCount = 0;
+    const maxQuestions = 2;
+
+    function getRandomLeagueIndex() {
+      let idx;
+      if (usedIndexes.length >= leagues.length) return -1;
+      do {
+        idx = Math.floor(Math.random() * leagues.length);
+      } while (usedIndexes.includes(idx));
+      usedIndexes.push(idx);
+      return idx;
+    }
+
+    function generateQuestion() {
+      if (questionCount >= maxQuestions) {
+        endQuiz();
+        return;
+      }
+
+      const correctIndex = getRandomLeagueIndex();
+      if (correctIndex === -1) {
+        alert("Er zijn geen competities meer beschikbaar.");
+        return;
+      }
+
+      const correctLeague = leagues[correctIndex];
+      document.getElementById("leagueImage").src = correctLeague.imageUrl || "/assets/placeholder.png";
+
+      const options = [correctLeague.name];
+      while (options.length < 4) {
+        const rand = leagues[Math.floor(Math.random() * leagues.length)];
+        if (!options.includes(rand.name)) {
+          options.push(rand.name);
+        }
+      }
+
+      options.sort(() => Math.random() - 0.5);
+
+      const ul = document.getElementById("quizOptions");
+      ul.innerHTML = '';
+
+      options.forEach(option => {
+        const li = document.createElement("li");
+        li.textContent = option;
+        li.addEventListener("click", () => {
+          if (li.classList.contains("clicked")) return;
+          [...ul.children].forEach(el => el.classList.add("clicked"));
+
+          if (option === correctLeague.name) {
+            li.style.backgroundColor = 'green';
+            score++;
+          } else {
+            li.style.backgroundColor = 'red';
+          }
+          document.getElementById("nextBtn").disabled = false;
+        });
+        ul.appendChild(li);
+      });
+
+      document.getElementById("nextBtn").disabled = true;
+      questionCount++;
+    }
+
+    function endQuiz() {
+      document.querySelector(".quiz-question").classList.add("hidden");
+      const endScreen = document.getElementById("quizEndScreen");
+      document.getElementById("finalScoreText").textContent = `Je score is ${score} van de ${maxQuestions}.`;
+      endScreen.classList.remove("hidden");
+    }
+
+    document.getElementById("nextBtn").addEventListener("click", generateQuestion);
+    document.getElementById("startQuizBtn").addEventListener("click", () => {
+      if (leagues.length === 0) {
+        alert("Er zijn geen competities met een logo beschikbaar.");
+        return;
+      }
+      document.getElementById("rulesBox").classList.add("hidden");
+      document.querySelector(".quiz-container").classList.remove("hidden");
+      generateQuestion();
     });
-</script>
+  </script>
+</body>
+</html>
