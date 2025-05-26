@@ -1115,10 +1115,9 @@ body.quiz-page {
 }
 
 .quiz-container {
-  background: rgba(255, 255, 255, 0.1);
+  background: transparent;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
   width: 100%;
   max-width: 500px;
   text-align: center;
@@ -1386,6 +1385,7 @@ body.quiz-page {
 }
 
 #quizQuestion {
+  color: #00bfff;
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
 }
@@ -1447,4 +1447,45 @@ body.quiz-page {
   min-height: calc(100vh - 150px);
   /* ruimte voor header/footer */
   padding: 2rem 1rem;
+}
+.quiz-end {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 50px 40px; /* iets meer ruimte */
+  border-radius: 20px;
+  text-align: center;
+  color: white;
+  max-width: 500px;  /* verhoogd van 400 naar 500 */
+  margin: 150px auto;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  font-size: 1.3rem;
+}
+
+.quiz-end h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.quiz-end button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #1e90ff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.quiz-end button:hover {
+  background-color: #0071e3;
+}
+
+.quiz-end-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
 }
