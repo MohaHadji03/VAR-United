@@ -2,25 +2,29 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/reset.css">
-    <title><%= title %></title>
-    <link rel="icon" type="" href="/assets/logoCropped.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/reset.css">
+  <title>
+    <%= title %>
+  </title>
+  <link rel="icon" type="" href="/assets/logoCropped.png">
 </head>
 
 <body>
-    <header>
-        <a href="home"><img src="assets/logoCropped.png" alt="logo"></a>
-        <div class="right-section">
-  <div class="user-info">
-    <img class="user-icon" src="assets/nouserselected.png" alt="user-icon">
-    <p><%= user.username %></p>
-  </div>
-  <form method="POST" action="/logout">
-    <button type="submit" class="loguit">Log uit</button>
-  </form>
-</div>
+  <header>
+    <a href="home"><img src="assets/logoCropped.png" alt="logo"></a>
+    <div class="right-section">
+      <div class="user-info">
+        <img class="user-icon" src="assets/nouserselected.png" alt="user-icon">
+        <p>
+          <%= user.username %>
+        </p>
+      </div>
+      <form method="POST" action="/logout">
+        <button type="submit" class="loguit">Log uit</button>
+      </form>
+    </div>
 
-    </header>
+  </header>
