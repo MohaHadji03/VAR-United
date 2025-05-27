@@ -23,7 +23,7 @@
 
     <main>
         <section class="image-gallery">
-            <a href="#">
+            <a href="#" class="unavailable-game">
                 <div class="card" data-text="Fortnite">
                     <img src="/assets/fortnite.jpg" alt="Fortnite">
                 </div>
@@ -33,27 +33,73 @@
                     <img src="/assets/fifa.jpg" alt="FIFA">
                 </div>
             </a>
-            <a href="#">
+            <a href="#" class="unavailable-game">
                 <div class="card" data-text="LOTR">
                     <img src="/assets/lotr.jpg" alt="LOTR">
                 </div>
             </a>
-            <a href="#">
+            <a href="#" class="unavailable-game">
                 <div class="card" data-text="Magic The Gathering">
                     <img src="/assets/magicthegathering.jpg" alt="Magic The Gathering">
                 </div>
             </a>
-            <a href="#">
+            <a href="#" class="unavailable-game">
                 <div class="card" data-text="Pokémon">
                     <img src="/assets/fakepoke.jpg" alt="Pokémon">
                 </div>
             </a>
-            <a href="#">
+            <a href="#" class="unavailable-game">
                 <div class="card" data-text="Lego Masters">
                     <img src="/assets/legomasters.jpg" alt="Lego Masters">
                 </div>
             </a>
         </section>
     </main>
-    
+
+    <!-- Eenvoudige popup -->
+    <div id="unavailableGamePopup" class="popup-overlay">
+        <div class="popup-content">
+            <span class="popup-close">&times;</span>
+            <h2>Game niet beschikbaar</h2>
+            <p>Deze game is momenteel niet beschikbaar. Alleen FIFA is op dit moment speelbaar.</p>
+            <div class="popup-buttons">
+                <button class="popup-button secondary popup-close-btn">Sluiten</button>
+                <a href="/home" class="popup-button primary">Ga naar FIFA</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Basis JavaScript voor de popup -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const unavailableLinks = document.querySelectorAll('.unavailable-game');
+            const popup = document.getElementById('unavailableGamePopup');
+            const closeButtons = document.querySelectorAll('.popup-close, .popup-close-btn');
+            
+            // Open popup wanneer op niet-beschikbare game wordt geklikt
+            unavailableLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    popup.classList.add('active');
+                });
+            });
+            
+            // Sluit popup
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    popup.classList.remove('active');
+                });
+            });
+            
+            // Sluit popup bij klik buiten content
+            popup.addEventListener('click', function(e) {
+                if (e.target === popup) {
+                    popup.classList.remove('active');
+                }
+            });
+        });
+    </script>
+
     <%- include("partials/footer") %>
+</body>
+</html>
