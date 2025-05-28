@@ -187,6 +187,20 @@ header img {
     max-width: 80px;
     min-width: 50px;
   }
+
+   .club-card {
+    margin: 10px 15px;
+    max-width: none;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar .user {
+    margin-top: 10px;
+  }
 }
 
 footer {
@@ -1007,12 +1021,23 @@ button {
 }
 
 @media (max-width: 768px) {
+ .comp__container {
+    justify-content: center;
+    padding: 0 10px; /* extra ruimte aan de zijkanten */
+  }
+
+  .comp__card {
+    width: 90%; /* compacter op mobiel */
+    height: 20vh; /* hoogte automatisch afhankelijk van content */
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 12px;
+  }
+
+  
   .comp__card__description {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-    max-height: 190px;
-    font-size: 4vw;
+    font-size: 4vw; /* Al aanwezig, maar voor de zekerheid */
+    max-height: 100px;
   }
 }
 
@@ -1597,4 +1622,56 @@ body.quiz-page {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/*back button */ 
+
+.back__wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.back__button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #002571;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.back__button:hover {
+  background-color: #004080;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .image-gallerys {
+  display: grid;
+  grid-template-columns: 1fr; /* Enkele kolom */
+  gap: 20px;
+  max-width: 90vw;
+  margin: 20px auto;
+  padding: 0 10px;
+  text-align: center;
+}
+
+.between-card {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.between-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
 }
