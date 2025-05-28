@@ -9,6 +9,7 @@
 
 html,
 body {
+  background-color: black;
   height: 100%;
   margin: 0;
   min-height: 100vh;
@@ -49,109 +50,110 @@ body {
 /*------------------------Pop-up landing---------------------*/
 
 .popup-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    visibility: hidden;
-    opacity: 0;
-    transition: 0.3s;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s;
 }
 
 .popup-overlay.active {
-    visibility: visible;
-    opacity: 1;
+  visibility: visible;
+  opacity: 1;
 }
 
 .popup-content {
-    background: var(--secondary-color);
-    padding: 25px;
-    border-radius: 8px;
-    max-width: 400px;
-    text-align: center;
-    position: relative;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  background: var(--secondary-color);
+  padding: 25px;
+  border-radius: 8px;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .popup-content h2 {
-    color: var(--primary-color);
-    margin-top: 0;
-    font-size: 20px;
-    margin-bottom: 15px;
+  color: var(--primary-color);
+  margin-top: 0;
+  font-size: 20px;
+  margin-bottom: 15px;
 }
 
-.popup-content p{
+.popup-content p {
   color: var(--primary-color);
 }
 
 .popup-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    cursor: pointer;
-    color: #999;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #999;
 }
 
 .popup-close:hover {
-    color: var(--primary-color);
+  color: var(--primary-color);
 }
 
 .popup-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
 }
 
 .popup-button {
-    padding: 10px 25px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: 0.2s;
-    font-size: 14px;
-    min-width: 120px;
-    text-decoration: none;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+  font-size: 14px;
+  min-width: 120px;
+  text-decoration: none;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .popup-button:hover {
-    transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .popup-button.primary {
-    background: var(--primary-color);
-    color: var(--secondary-color);
-    box-shadow: 0 2px 4px rgba(0, 37, 113, 0.25);
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  box-shadow: 0 2px 4px rgba(0, 37, 113, 0.25);
 }
 
 .popup-button.primary:hover {
-    background: #003399;
+  background: #003399;
 }
 
 .popup-button.secondary {
-    background: var(--secondary-color);
-    color: var(--primary-color);
-    border: 1.5px solid var(--primary-color);
+  background: var(--secondary-color);
+  color: var(--primary-color);
+  border: 1.5px solid var(--primary-color);
 }
 
 .popup-button.secondary:hover {
-    background: var(--tertiary-color);
-    color: var(--secondary-color);
-    border-color: var(--tertiary-color);
+  background: var(--tertiary-color);
+  color: var(--secondary-color);
+  border-color: var(--tertiary-color);
 }
 
 .logo-quiz {
   margin-top: 15px;
   margin-left: 15px;
 }
+
 h1 {
   color: var(--secondary-color);
 }
@@ -924,8 +926,10 @@ button {
 
 .card__icon {
   display: flex;
-  align-items: center;     /* Verticaal centreren */
-  justify-content: center; /* Horizontaal centreren */
+  align-items: center;
+  /* Verticaal centreren */
+  justify-content: center;
+  /* Horizontaal centreren */
   width: 100%;
   height: 100%;
 }
@@ -982,10 +986,10 @@ button {
 .comp__card__button {
   padding: 15px;
   border-radius: 8px;
-  background:#002571;
+  background: #002571;
   border: none;
   color: var(--secondary-color);
- 
+
 }
 
 .comp__card__buttons {
@@ -993,7 +997,7 @@ button {
   gap: 20px;
   justify-content: center;
   flex-wrap: wrap;
-  
+
 }
 
 .secondary {
@@ -1024,7 +1028,7 @@ button {
 }
 
 .pagination-controls button {
-  background-color:#002571;
+  background-color: #002571;
   color: white;
   border: none;
   padding: 0.5em 1.2em;
@@ -1035,7 +1039,7 @@ button {
 }
 
 .pagination-controls button:disabled {
-  background-color:#777;
+  background-color: #777;
   cursor: not-allowed;
 }
 
@@ -1060,7 +1064,7 @@ button {
 }
 
 .pagination-controls-leagues button {
-  background-color:#002571;
+  background-color: #002571;
   color: white;
   border: none;
   padding: 0.5em 1.2em;
@@ -1071,7 +1075,7 @@ button {
 }
 
 .pagination-controls-leagues button:disabled {
-  background-color:#777;
+  background-color: #777;
   cursor: not-allowed;
 }
 
@@ -1200,21 +1204,6 @@ body.quiz-page {
   width: 10vw;
   max-width: 120px;
   height: auto;
-}
-
-.quiz-container {
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-  min-height: auto;
-}
-
-.quiz-question img {
-  width: 100%;
-  height: auto;
-  max-height: 250px;
-  border-radius: 10px;
-  object-fit: contain;
 }
 
 .quiz-options {
@@ -1379,10 +1368,13 @@ body.quiz-page {
 }
 
 .quiz-start {
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
+
 #startBtn,
 #beginQuizBtn {
   padding: 10px 20px;
@@ -1405,6 +1397,8 @@ body.quiz-page {
 }
 
 #rulesBox {
+  height: auto;
+  margin: 0 auto;
   background: rgba(0, 0, 0, 0.7);
   padding: 2rem;
   border-radius: 20px;
@@ -1415,7 +1409,9 @@ body.quiz-page {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
 
-#rulesBox, .quiz-question, .quiz-end {
+#rulesBox,
+.quiz-question,
+.quiz-end {
   margin: 0 auto;
 }
 
@@ -1442,30 +1438,46 @@ body.quiz-page {
   transition: background-color 0.3s ease;
 }
 
+body.quiz-page {
+  min-height: 100vh;
+  background: black url(/assets/staduim.jpg) no-repeat center center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* iets boven het midden */
+  padding-top: 5vh; /* ruimte bovenaan */
+  overflow-y: auto; /* zodat je nog kan scrollen op mobiel */
+}
+
 .quiz-container {
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-  min-height: auto;
+  width: 100%;
+  max-width: 500px;
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
 }
 
 .quiz-question {
-  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: auto;
   padding: 2rem;
   border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-  text-align: center;
   max-width: 500px;
   width: 100%;
+  background: rgba(0, 0, 0, 0.65);
   color: white;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
 }
 
 .quiz-question img {
-  width: 100%;
-  max-width: 300px;
+  max-height: 120px;
   height: auto;
-  margin-bottom: 1rem;
-  border-radius: 10px;
+  width: auto;
+  margin: 0 auto 1rem;
   object-fit: contain;
 }
 
@@ -1476,11 +1488,12 @@ body.quiz-page {
 }
 
 #quizOptions {
-  list-style: none;
-  padding: 0;
-  margin: 0 auto 2rem;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
+  margin: 1rem 0;
+  flex-grow: 1;
+  justify-content: center;
 }
 
 #quizOptions li {
@@ -1533,14 +1546,17 @@ body.quiz-page {
   /* ruimte voor header/footer */
   padding: 2rem 1rem;
 }
+
 .quiz-end {
   background: rgba(0, 0, 0, 0.6);
-  padding: 50px 40px; /* iets meer ruimte */
+  padding: 50px 40px;
+  /* iets meer ruimte */
   border-radius: 20px;
   text-align: center;
   color: white;
-  max-width: 500px;  /* verhoogd van 400 naar 500 */
-  margin: 150px auto;
+  max-width: 500px;
+  /* verhoogd van 400 naar 500 */
+  margin: 0 auto;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
   font-size: 1.3rem;
 }
@@ -1573,4 +1589,12 @@ body.quiz-page {
   justify-content: center;
   margin-top: 20px;
   flex-wrap: wrap;
+}
+
+body.quiz-page {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
